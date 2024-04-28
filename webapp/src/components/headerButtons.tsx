@@ -1,4 +1,4 @@
-export default function FileExplorer() {
+export default function HeaderButtons() {
   return (
     <div>
       <button className="btn">

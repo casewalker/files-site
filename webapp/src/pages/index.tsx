@@ -1,9 +1,15 @@
-import FileExplorer from "@/components/fileExplorer";
+import HeaderButtons from "@/components/headerButtons";
+import Breadcrumbs from "@/components/breadcrumbs";
 
 export default function Home() {
   return (
     <main>
-      <FileExplorer />
+      <Breadcrumbs directoryLocations={[
+        "example1",
+        "example2",
+        "example3",
+      ]} />
+      <HeaderButtons />
     </main>
   );
 }
