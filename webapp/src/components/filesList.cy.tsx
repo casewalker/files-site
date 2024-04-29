@@ -9,7 +9,7 @@ describe("<FilesList />", () => {
     cy.get("thead").should("contain.text", "Download");
   });
 
-  it("should have no data rows when there's no input files", () => {
+  it("should have no data rows when there are no input files", () => {
     cy.mount(<FilesList files={[]} />);
     cy.get("tbody").should("not.contain.html", "tr");
   });
@@ -22,7 +22,6 @@ describe("<FilesList />", () => {
     cy.get("tbody > tr").eq(1).should("contain.text", "file2.txt");
     cy.get('svg[data-testid="downarrow-svg"]').should("exist");
     cy.get('svg[data-testid="downarrow-svg"]').should("have.length", 2);
-
   });
 
   it("should have the Image SVGs for an image", () => {
