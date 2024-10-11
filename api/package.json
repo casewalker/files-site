@@ -1,4 +1,6 @@
 {
+  "name": "s3-file-site-behind-cognito--api",
+  "private": true,
   "dependencies": {
     "@aws-sdk/client-dynamodb": "3.637.0",
     "@aws-sdk/client-s3": "3.637.0",

@@ -1,0 +1,19 @@
+{
+  "name": "s3-file-site-behind-cognito",
+  "version": "0.1.0",
+  "private": true,
+  "workspaces": [
+    "./api",
+    "./webapp"
+  ],
+  "scripts": {
+    "lint": "npm run lint --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present"
+  },
+  "devDependencies": {
+    "@types/node": "22.5.2",
+    "eslint": "8.57.0",
+    "eslint-config-next": "14.2.7",
+    "typescript": "5.5.4"
+  }
+}
