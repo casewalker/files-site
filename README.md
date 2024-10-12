@@ -18,6 +18,7 @@ Nice-to-haves:
   * I think instead of breadcrumbs, I might want a nested wiki sidebar
   * Actually both
   * Don't forget to make the last breadcrumb not a link
+  * Make the link-crumbs look like links somehow
 * Previews of the files? Maybe... probably not really, data compromise concerns
 * Updated URL for subdirectories
 * Automated emails of usage/access every week: users, locations, downloads, etc.
