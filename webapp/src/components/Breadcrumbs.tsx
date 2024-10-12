@@ -9,12 +9,7 @@ export default function Breadcrumbs({ directoryLocations }: Props) {
     <div className="text-sm breadcrumbs">
       <ul>
         {directoryLocations.map((directoryLocation, index) => {
-          const breadcrumbContent = (
-            <>
-              {FOLDER_ICON}
-              {directoryLocation}
-            </>
-          );
+          const breadcrumbContent = <>{FOLDER_ICON}{directoryLocation}</>;
 
           return (
             <li key={`${index}:${directoryLocation}`}>

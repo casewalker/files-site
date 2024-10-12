@@ -41,7 +41,7 @@ const getFileTypeSvg = (filename: string) => {
   return IMG_EXTENSIONS.has(extension) ? IMAGE_ICON : FILE_ICON;
 };
 
-export default function FilesList({ files }: Props) {
+export default function FilesTable({ files }: Props) {
   return (
     <div className="overflow-x-auto">
       <table className="table">

@@ -1,4 +1,4 @@
-import HeaderButtons from "./headerButtons";
+import HeaderButtons from "./HeaderButtons";
 
 describe("<HeaderButtons />", () => {
   it("has two buttons, one to create a new directory, one to upload a file", () => {

@@ -1,4 +1,4 @@
-import Breadcrumbs from "@/components/breadcrumbs";
+import Breadcrumbs from "@/components/Breadcrumbs";
 
 describe("<Breadcrumbs />", () => {
   it("should have three folders in order when given as props", () => {
