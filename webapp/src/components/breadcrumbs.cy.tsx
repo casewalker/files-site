@@ -15,4 +15,14 @@ describe("<Breadcrumbs />", () => {
     cy.mount(<Breadcrumbs directoryLocations={[]}/>);
     cy.get("ul").should("not.contain.html", "li");
   });
+
+  it("the last breadcrumb should not be a link, the others should be", () => {
+    cy.mount(
+      <Breadcrumbs directoryLocations={["directory1", "Directory2", "Dir3"]} />
+    );
+    cy.get("ul").should("contain.html", "li");
+    cy.get("li").eq(0).should("have.descendants", "a");
+    cy.get("li").eq(1).should("have.descendants", "a");
+    cy.get("li").eq(2).should("not.have.descendants", "a");
+  });
 });

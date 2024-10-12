@@ -24,10 +24,19 @@ export default function Breadcrumbs({ directoryLocations }: Props) {
       <ul>
         {directoryLocations.map((directoryLocation, index) => (
           <li key={`${index}:${directoryLocation}`}>
-            <a>
-              {FOLDER_SVG}
-              {directoryLocation}
-            </a>
+              {(index === directoryLocations.length - 1) ?
+                (
+                  <span className="inline-flex items-center">
+                    {FOLDER_SVG}
+                    {directoryLocation}
+                  </span>
+                ) : (
+                  <a>
+                    {FOLDER_SVG}
+                    {directoryLocation}
+                  </a>
+                )
+              }
           </li>
         ))}
       </ul>
