@@ -18,7 +18,7 @@ export default function Breadcrumbs({ directoryLocations }: Props) {
                   {breadcrumbContent}
                 </span>
               ) : (
-                <a>
+                <a className="link link-neutral">
                   {breadcrumbContent}
                 </a>
               )}
