@@ -2,9 +2,11 @@ export const DOWN_ARROW = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
+    stroke="currentColor"
     viewBox="0 0 24 24"
     strokeWidth="2"
-    className="w-5 h-5 stroke-current"
+    height="1.25rem"
+    width="1.25rem"
     data-testid="downarrow-svg"
   >
     <path
@@ -19,9 +21,11 @@ export const FILE_ICON = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
+    stroke="currentColor"
     viewBox="0 0 24 24"
     strokeWidth="1.5"
-    className="w-4 h-4 stroke-current"
+    height="1rem"
+    width="1rem"
     data-testid="file-svg"
   >
     <path
@@ -45,8 +49,10 @@ export const FOLDER_ICON = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
+    stroke="currentColor"
     viewBox="0 0 24 24"
-    className="w-4 h-4 stroke-current"
+    height="1rem"
+    width="1rem"
   >
     {FOLDER_ICON_PATH}
   </svg>
@@ -56,9 +62,11 @@ export const FOLDER_ICON_FOR_MENU = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
+    stroke="currentColor"
     viewBox="0 0 24 24"
     strokeWidth="1.5"
-    className="h-4 w-4 stroke-current"
+    height="1rem"
+    width="1rem"
   >
     <path
       strokeLinecap="round"
@@ -72,8 +80,10 @@ export const FOLDER_ICON_LARGER = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
+    stroke="currentColor"
     viewBox="0 0 24 24"
-    className="h-6 w-6 stroke-current"
+    height="1.5rem"
+    width="1.5rem"
   >
     {FOLDER_ICON_PATH}
   </svg>
@@ -83,9 +93,11 @@ export const IMAGE_ICON = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
+    stroke="currentColor"
     viewBox="0 0 24 24"
     strokeWidth="1.5"
-    className="w-4 h-4 stroke-current"
+    height="1rem"
+    width="1rem"
     data-testid="image-svg"
   >
     <path
@@ -96,12 +108,33 @@ export const IMAGE_ICON = (
   </svg>
 );
 
+export const LOGOUT_ICON = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="currentColor"
+    stroke="currentColor"
+    viewBox="0 0 20 32"
+    height="1.5rem"
+    width="1.5rem"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="M0 9.875v12.219c0 1.125 0.469 2.125 1.219 2.906 0.75 0.75 1.719 1.156 2.844 1.156h6.125v-2.531h-6.125c-0.844 0-1.5-0.688-1.5-1.531v-12.219c0-0.844 0.656-1.5 1.5-1.5h6.125v-2.563h-6.125c-1.125 0-2.094 0.438-2.844 1.188-0.75 0.781-1.219 1.75-1.219 2.875zM6.719 13.563v4.875c0 0.563 0.5 1.031 1.063 1.031h5.656v3.844c0 0.344 0.188 0.625 0.5 0.781 0.125 0.031 0.25 0.031 0.313 0.031 0.219 0 0.406-0.063 0.563-0.219l7.344-7.344c0.344-0.281 0.313-0.844 0-1.156l-7.344-7.313c-0.438-0.469-1.375-0.188-1.375 0.563v3.875h-5.656c-0.563 0-1.063 0.469-1.063 1.031z"
+    />
+  </svg>
+);
+
 export const MENU_ICON = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
+    stroke="currentColor"
     viewBox="0 0 24 24"
-    className="inline-block h-5 w-5 stroke-current md:h-6 md:w-6"
+    height="1.25rem"
+    width="1.25rem"
+    // className="inline-block md:h-6 md:w-6"
+    className="inline-block"
   >
     <path
       strokeLinecap="round"
@@ -116,8 +149,10 @@ export const NEW_FILE_ICON = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
+    stroke="currentColor"
     viewBox="0 0 24 24"
-    className="h-6 w-6 stroke-current"
+    height="1.5rem"
+    width="1.5rem"
   >
     <path
       strokeLinecap="round"

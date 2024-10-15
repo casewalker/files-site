@@ -12,7 +12,7 @@ function FileExplorerMenuItems({ files }: Props) {
         switch (s3Object.type) {
           case S3ObjectType.DIRECTORY:
             return (
-              <li>
+              <li key={s3Object.path}>
                 <details>
                   <summary>
                     {FOLDER_ICON_FOR_MENU}
@@ -22,7 +22,10 @@ function FileExplorerMenuItems({ files }: Props) {
                     {(s3Object.contents.length !== 0) ? (
                       <FileExplorerMenuItems files={s3Object.contents} />
                     ) : (
-                      <li className="italic textarea-disabled pb-2">
+                      <li
+                        key={`${s3Object.path}/empty-placeholder`}
+                        className="italic textarea-disabled pb-2"
+                      >
                         (empty folder)
                       </li>
                     )}
@@ -32,7 +35,10 @@ function FileExplorerMenuItems({ files }: Props) {
             );
           case S3ObjectType.FILE:
             return (
-              <li className="py-2">
+              <li
+                key={s3Object.path}
+                className="py-2"
+              >
                 {s3Object.name}
               </li>
             );

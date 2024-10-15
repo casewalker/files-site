@@ -25,9 +25,3 @@ body {
     text-wrap: balance;
   }
 }
-
-@media (prefers-color-scheme: light) {
-  .btn {
-    @apply bg-base-300;
-  }
-}

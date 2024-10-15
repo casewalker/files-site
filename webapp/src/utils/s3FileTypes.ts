@@ -3,16 +3,20 @@ export enum S3ObjectType {
   DIRECTORY = "DIRECTORY",
 }
 
-export interface S3File {
-  type: S3ObjectType.FILE;
+interface AbstractS3Object {
+  type: S3ObjectType;
   name: string;
+  path: string;
+}
+
+export interface S3File extends AbstractS3Object {
+  type: S3ObjectType.FILE;
   lastModified: Date;
   size: number;
 }
 
-export interface S3Directory {
+export interface S3Directory extends AbstractS3Object {
   type: S3ObjectType.DIRECTORY;
-  name: string;
   contents: S3Object[];
 }
 
