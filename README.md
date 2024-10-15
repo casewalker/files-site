@@ -15,7 +15,11 @@ What is the goal? What is the plan?
 
 Nice-to-haves:
 * Breadcrumbs at the top?
-  * I think instead of breadcrumbs, I might want a nested wiki sidebar
+  - [x] I think instead of breadcrumbs, I might want a nested wiki sidebar
+  - [x] Actually both
+  - [x] Don't forget to make the last breadcrumb not a link
+  - [x] Make the link-crumbs look like links somehow
+  * Make the sidebar directories into links (that look like links?)
 * Previews of the files? Maybe... probably not really, data compromise concerns
 * Updated URL for subdirectories
 * Automated emails of usage/access every week: users, locations, downloads, etc.
