@@ -5,7 +5,7 @@ interface Props {
   files: S3Object[];
 }
 
-function FileExplorerMenuItems({ files }: Props) {
+export default function FileExplorerMenu({ files }: Props) {
   return (
     <>
       {files.map((s3Object) => {
@@ -20,7 +20,7 @@ function FileExplorerMenuItems({ files }: Props) {
                   </summary>
                   <ul>
                     {(s3Object.contents.length !== 0) ? (
-                      <FileExplorerMenuItems files={s3Object.contents} />
+                      <FileExplorerMenu files={s3Object.contents} />
                     ) : (
                       <li
                         key={`${s3Object.path}/empty-placeholder`}
@@ -45,22 +45,5 @@ function FileExplorerMenuItems({ files }: Props) {
         }
       })}
     </>
-  );
-}
-
-export default function FileExplorerMenu({files}: Props) {
-  return (
-    <div className="drawer-side">
-      <label
-        htmlFor="file-explorer-drawer"
-        aria-label="close sidebar"
-        className="drawer-overlay"
-      />
-      <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
-        <ul className="menu bg-base-200 rounded-lg w-full max-w-xs">
-          <FileExplorerMenuItems files={files} />
-        </ul>
-      </ul>
-    </div>
   );
 };

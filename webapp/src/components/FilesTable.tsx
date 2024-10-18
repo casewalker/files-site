@@ -37,6 +37,7 @@ const IMG_EXTENSIONS = new Set([
 ]);
 
 const getFileTypeSvg = (filename: string) => {
+
   const extension = filename.replaceAll(/.*\./g, "").toLowerCase();
   return IMG_EXTENSIONS.has(extension) ? IMAGE_ICON : FILE_ICON;
 };
@@ -47,8 +48,7 @@ export default function FilesTable({ files }: Props) {
       <table className="table">
         <thead>
           <tr>
-            <th></th>
-            <th>Name</th>
+            <th className="pl-10">Name</th>
             <th>Created</th>
             <th>Modified</th>
             <th>Download</th>
@@ -57,8 +57,14 @@ export default function FilesTable({ files }: Props) {
         <tbody>
           {files.map((file) => (
             <tr className="hover" key={file}>
-              <td>{getFileTypeSvg(file)}</td>
-              <td>{file}</td>
+              <td className="text-nowrap">
+                <span className="inline-block align-bottom pb-0.5">
+                  {getFileTypeSvg(file)}
+                </span>
+                <span className="ml-2">
+                  {file}
+                </span>
+              </td>
               <td>placeholder</td>
               <td>placeholder</td>
               <td>

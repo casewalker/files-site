@@ -1,13 +1,10 @@
 import { FOLDER_ICON_LARGER, LOGOUT_ICON, NEW_FILE_ICON } from "@/utils/svgs";
 
-export default function NavBar() {
+export default function NavBarButtons() {
   return (
-    <nav className="navbar bg-base-100">
-        <div className="flex-1">
-          <a className="btn btn-ghost text-xl">SecureCloudFiles</a>
-        </div>
-        <div className="flex-none">
-          <div className="flex gap-24">
+    <div className="navbar bg-base-100 w-full">
+        <div className="flex-none w-full">
+          <div className="flex gap-24 w-full justify-end">
             <div className="flex gap-4">
               <button className="btn">
                 {FOLDER_ICON_LARGER}
@@ -15,7 +12,7 @@ export default function NavBar() {
               </button>
               <button className="btn">
                 {NEW_FILE_ICON}
-                Upload File
+                Upload Files
               </button>
             </div>
             <button className="btn btn-outline">
@@ -24,6 +21,6 @@ export default function NavBar() {
             </button>
           </div>
         </div>
-    </nav>
+    </div>
   );
 }
