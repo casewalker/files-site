@@ -37,7 +37,6 @@ const IMG_EXTENSIONS = new Set([
 ]);
 
 const getFileTypeSvg = (filename: string) => {
-
   const extension = filename.replaceAll(/.*\./g, "").toLowerCase();
   return IMG_EXTENSIONS.has(extension) ? IMAGE_ICON : FILE_ICON;
 };

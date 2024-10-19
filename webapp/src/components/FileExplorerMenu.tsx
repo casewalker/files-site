@@ -23,8 +23,8 @@ export default function FileExplorerMenu({ files }: Props) {
                       <FileExplorerMenu files={s3Object.contents} />
                     ) : (
                       <li
-                        key={`${s3Object.path}/empty-placeholder`}
                         className="italic textarea-disabled pb-2"
+                        key={`${s3Object.path}/empty-placeholder`}
                       >
                         (empty folder)
                       </li>

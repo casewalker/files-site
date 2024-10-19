@@ -19,6 +19,7 @@ Nice-to-haves:
   - [x] Actually both
   - [x] Don't forget to make the last breadcrumb not a link
   - [x] Make the link-crumbs look like links somehow
+  - [] Figure out what I want to do with icons/nav-buttons in sm
   * Make the sidebar directories into links (that look like links?)
 * Previews of the files? Maybe... probably not really, data compromise concerns
 * Updated URL for subdirectories
