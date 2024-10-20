@@ -67,7 +67,7 @@ export default function FilesTable({ files }: Props) {
               <td>placeholder</td>
               <td>placeholder</td>
               <td>
-                <button className="btn btn-circle btn-sm">
+                <button className="btn btn-circle btn-sm" title="Download file">
                   {DOWN_ARROW}
                 </button>
               </td>

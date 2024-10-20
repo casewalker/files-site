@@ -25,6 +25,7 @@ export default function Home() {
                     className="drawer-button btn btn-square btn-ghost lg:hidden self-start ml-2"
                     htmlFor="file-explorer-drawer"
                     aria-label="Open menu"
+                    title="Open file menu"
                   >
                     {MENU_ICON}
                   </label>
@@ -49,7 +50,7 @@ export default function Home() {
             <header className={"top-0 w-full h-16 z-20 gap-2 px-4 py-2 bg-base-100 sticky items-center " +
               "font-title text-lg md:text-2xl bg-opacity-75 backdrop-blur-sm transition-shadow " +
               "duration-100 shadow-sm [transform:translate3d(0,0,0)]"}>
-              <a className="btn btn-ghost text-xl ml-6">SecureCloudFiles</a>
+              <a className="btn btn-ghost text-xl ml-6" title="Home directory">SecureCloudFiles</a>
             </header>
             <ul className="menu w-full max-w-xs bg-base-200 flex-grow">
               <FileExplorerMenu files={[
@@ -86,16 +87,23 @@ export default function Home() {
                   path: "directory3",
                   contents: [
                     {
+                      type: S3ObjectType.FILE,
+                      name: "file3.txt",
+                      lastModified: new Date("2020-01-01"),
+                      size: 111,
+                      path: "directory3/file3.txt",
+                    },
+                    {
                       type: S3ObjectType.DIRECTORY,
                       name: "directory4",
                       path: "directory3/directory4",
                       contents: [
                         {
                           type: S3ObjectType.FILE,
-                          name: "file3.txt",
+                          name: "file4.txt",
                           lastModified: new Date("2020-01-03"),
                           size: 2000,
-                          path: "directory3/directory4/file3.txt",
+                          path: "directory3/directory4/file4.txt",
                         }
                       ]
                     },
@@ -103,10 +111,10 @@ export default function Home() {
                 },
                 {
                   type: S3ObjectType.FILE,
-                  name: "file4.txt",
+                  name: "file5.txt",
                   lastModified: new Date("2020-01-04"),
                   size: 2048,
-                  path: "file4.txt",
+                  path: "file5.txt",
                 },
               ]}/>
             </ul>

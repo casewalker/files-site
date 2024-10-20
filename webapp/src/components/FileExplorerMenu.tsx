@@ -14,21 +14,21 @@ export default function FileExplorerMenu({ files }: Props) {
             return (
               <li key={s3Object.path}>
                 <details>
-                  <summary>
+                  <summary className="gap-1">
                     {FOLDER_ICON_FOR_MENU}
                     {s3Object.name}
                   </summary>
                   <ul>
-                    {(s3Object.contents.length !== 0) ? (
-                      <FileExplorerMenu files={s3Object.contents} />
-                    ) : (
+                    {(s3Object.contents.length === 0) ? (
                       <li
-                        className="italic textarea-disabled pb-2"
+                        className="italic textarea-disabled pb-2 pl-4"
                         key={`${s3Object.path}/empty-placeholder`}
                       >
                         (empty folder)
                       </li>
-                    )}
+                      ) : (
+                        <FileExplorerMenu files={s3Object.contents}/>
+                      )}
                   </ul>
                 </details>
               </li>
@@ -37,7 +37,7 @@ export default function FileExplorerMenu({ files }: Props) {
             return (
               <li
                 key={s3Object.path}
-                className="py-2"
+                className="py-2 pl-4"
               >
                 {s3Object.name}
               </li>
