@@ -12,12 +12,12 @@ export default function NavBarButtons() {
               </button>
               <button className="btn" title="Upload files">
                 {UPLOAD_FILE_ICON_LARGER}
-                Upload Files
+                <span className="hidden invisible sm:inline sm:visible">Upload Files</span>
               </button>
             </div>
             <button className="btn btn-outline" title="Log out">
               {LOGOUT_ICON}
-              Log out
+              <span className="hidden invisible sm:inline sm:visible">Log out</span>
             </button>
           </div>
         </div>
