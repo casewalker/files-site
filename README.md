@@ -14,18 +14,15 @@ What is the goal? What is the plan?
 * Each page has a "new directory" button which will create a new dir in the current location
 
 Nice-to-haves:
-* Breadcrumbs at the top?
-  - [x] I think instead of breadcrumbs, I might want a nested wiki sidebar
-  - [x] Actually both
-  - [x] Don't forget to make the last breadcrumb not a link
-  - [x] Make the link-crumbs look like links somehow
-  - [] Figure out what I want to do with icons/nav-buttons in sm
-  * Make the sidebar directories into links (that look like links?)
-* Previews of the files? Maybe... probably not really, data compromise concerns
+* Make the sidebar directories into links? (that look like links? Perhaps files instead?)
 * Updated URL for subdirectories
-* Automated emails of usage/access every week: users, locations, downloads, etc.
 * Deep linking that persists after logging in
+* Automated emails of usage/access every week: users, locations, downloads, etc.
+* User Management controls - change password?
 
 Must have?
 * Limit users to X downloads per day (3?) and Y downloads per week (10?). If someone wants to download more, they'll have to talk to me.
   * Most easily managed with a DynamoDB table
+  * Overrideable on an individual level with some kind of controls
+  * Perhaps display how many downloads a user has left?
+* Automatic logout after inactivity
