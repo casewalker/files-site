@@ -3,7 +3,7 @@ import FileExplorerMenu from "@/components/FileExplorerMenu";
 import FilesTable from "@/components/FilesTable";
 import NavBarButtons from "@/components/NavBarButtons";
 import { S3ObjectType } from "@/utils/s3FileTypes";
-import { MENU_ICON } from "@/utils/svgs";
+import { MENU_ICON, X_ICON } from "@/utils/svgs";
 
 export default function Home() {
   return (
@@ -50,7 +50,17 @@ export default function Home() {
             <header className={"top-0 w-full h-16 z-20 gap-2 px-4 py-2 bg-base-100 sticky items-center " +
               "font-title text-lg md:text-2xl bg-opacity-75 backdrop-blur-sm transition-shadow " +
               "duration-100 shadow-sm [transform:translate3d(0,0,0)]"}>
-              <a className="btn btn-ghost text-xl ml-6" title="Home directory">SecureCloudFiles</a>
+              <a className="btn btn-ghost text-xl ml-6" title="Home directory">
+                SecureCloudFiles
+              </a>
+              <label
+                className={"drawer-overlay lg:hidden lg:invisible absolute opacity-55 right-2 " +
+                  "btn btn-ghost btn-circle btn-sm"}
+                htmlFor="file-explorer-drawer"
+                aria-label="Close menu"
+              >
+                {X_ICON}
+              </label>
             </header>
             <ul className="menu w-full max-w-xs bg-base-200 flex-grow">
               <FileExplorerMenu files={[

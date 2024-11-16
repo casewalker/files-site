@@ -164,6 +164,24 @@ export const NEW_FOLDER_ICON_LARGER = (
   </svg>
 );
 
+export const X_ICON = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    stroke="currentColor"
+    viewBox="0 0 24 24"
+    height="1.2rem"
+    width="1.2rem"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="2"
+      d="M6 18L18 6M6 6l12 12"
+    />
+  </svg>
+)
+
 export const UPLOAD_FILE_ICON_LARGER = (
   <svg
     xmlns="http://www.w3.org/2000/svg"

@@ -13,14 +13,14 @@ export default function Breadcrumbs({ directoryLocations }: Props) {
 
           return (
             <li key={`${index}:${directoryLocation}`}>
-              {(index === directoryLocations.length - 1) ? (
-                <span className="inline-flex items-center gap-0.5">
-                  {breadcrumbContent}
-                </span>
-              ) : (
+              {(index < directoryLocations.length - 1) ? (
                 <a className="link link-neutral gap-0.5 inline-flex">
                   {breadcrumbContent}
                 </a>
+              ) : (
+                <span className="items-center gap-0.5 inline-flex">
+                  {breadcrumbContent}
+                </span>
               )}
             </li>
           )

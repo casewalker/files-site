@@ -9,7 +9,6 @@ export default function FileExplorerMenu({ files }: Props) {
   return (
     <ul>
       {files.map((s3Object) => {
-
         switch (s3Object.type) {
           case S3ObjectType.DIRECTORY:
             return (
@@ -19,7 +18,9 @@ export default function FileExplorerMenu({ files }: Props) {
                     {FOLDER_ICON_FOR_MENU}
                     {s3Object.name}
                   </summary>
-                  {(s3Object.contents.length === 0) ? (
+                  {(s3Object.contents.length > 0) ? (
+                    <FileExplorerMenu files={s3Object.contents} />
+                  ) : (
                     <ul>
                       <li
                         className="italic textarea-disabled pb-2 pl-4"
@@ -28,18 +29,13 @@ export default function FileExplorerMenu({ files }: Props) {
                         (empty folder)
                       </li>
                     </ul>
-                  ) : (
-                    <FileExplorerMenu files={s3Object.contents}/>
                   )}
                 </details>
               </li>
             );
           case S3ObjectType.FILE:
             return (
-              <li
-                key={s3Object.path}
-                className="py-2 pl-4"
-              >
+              <li key={s3Object.path} className="py-2 pl-4">
                 {s3Object.name}
               </li>
             );
