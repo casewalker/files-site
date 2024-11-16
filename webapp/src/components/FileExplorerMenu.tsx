@@ -7,8 +7,9 @@ interface Props {
 
 export default function FileExplorerMenu({ files }: Props) {
   return (
-    <>
+    <ul>
       {files.map((s3Object) => {
+
         switch (s3Object.type) {
           case S3ObjectType.DIRECTORY:
             return (
@@ -18,18 +19,18 @@ export default function FileExplorerMenu({ files }: Props) {
                     {FOLDER_ICON_FOR_MENU}
                     {s3Object.name}
                   </summary>
-                  <ul>
-                    {(s3Object.contents.length === 0) ? (
+                  {(s3Object.contents.length === 0) ? (
+                    <ul>
                       <li
                         className="italic textarea-disabled pb-2 pl-4"
                         key={`${s3Object.path}/empty-placeholder`}
                       >
                         (empty folder)
                       </li>
-                      ) : (
-                        <FileExplorerMenu files={s3Object.contents}/>
-                      )}
-                  </ul>
+                    </ul>
+                  ) : (
+                    <FileExplorerMenu files={s3Object.contents}/>
+                  )}
                 </details>
               </li>
             );
@@ -44,6 +45,6 @@ export default function FileExplorerMenu({ files }: Props) {
             );
         }
       })}
-    </>
+    </ul>
   );
 };

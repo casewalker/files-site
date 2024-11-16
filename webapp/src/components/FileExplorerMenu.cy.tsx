@@ -6,24 +6,28 @@ const FILE1: S3File = {
   name: "testfile1",
   lastModified: new Date("2020-01-01"),
   size: 1,
+  path: "dir2/dir1/testfile1",
 };
 
 const DIR1: S3Directory = {
   type: S3ObjectType.DIRECTORY,
   name: "dir1",
   contents: [FILE1],
+  path: "dir2/dir1",
 };
 
 const EMPTY_DIR: S3Directory = {
   type: S3ObjectType.DIRECTORY,
   name: "dir3",
   contents: [],
+  path: "dir2/dir3"
 };
 
 const DIR2: S3Directory = {
   type: S3ObjectType.DIRECTORY,
   name: "dir2",
   contents: [DIR1, EMPTY_DIR],
+  path: "dir2"
 };
 
 describe("<FileExplorerMenu>", () => {
