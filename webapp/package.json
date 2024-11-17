@@ -1,5 +1,5 @@
 {
-  "name": "s3-file-site-behind-cognito",
+  "name": "@secure-cloud-files/webapp",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -7,10 +7,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test:open:e2e": "cypress open --e2e --browser=chrome",
     "test:e2e": "cypress run --e2e --browser=chrome",
-    "test:open:component": "cypress open --component --browser=chrome",
-    "test:component": "cypress run --component --browser=chrome"
+    "test:e2e:open": "cypress open --e2e --browser=chrome",
+    "test:component": "cypress run --component --browser=chrome",
+    "test:component:open": "cypress open --component --browser=chrome"
   },
   "dependencies": {
     "jsonwebtoken": "9.0.2",

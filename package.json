@@ -1,0 +1,16 @@
+{
+  "name": "secure-cloud-files",
+  "description": "A website for managing files securely in the cloud",
+  "version": "0.1.0",
+  "author": "Case Walker",
+  "license": "AGPL-3.0-or-later",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "workspaces": [
+    "api",
+    "infra",
+    "webapp"
+  ]
+}
