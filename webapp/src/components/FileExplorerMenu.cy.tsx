@@ -1,5 +1,9 @@
-import FileExplorerMenu from "@/components/FileExplorerMenu";
-import { type S3Directory, type S3File, S3ObjectType } from "@/utils/s3FileTypes";
+import FileExplorerMenu from "@secure-cloud-files/webapp/src/components/FileExplorerMenu";
+import {
+  type S3Directory,
+  type S3File,
+  S3ObjectType,
+} from "@secure-cloud-files/webapp/src/utils/s3FileTypes";
 
 const FILE1: S3File = {
   type: S3ObjectType.FILE,

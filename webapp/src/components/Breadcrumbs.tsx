@@ -1,4 +1,4 @@
-import { FOLDER_ICON } from "@/utils/svgs";
+import { FOLDER_ICON } from "@secure-cloud-files/webapp/src/utils/svgs";
 
 interface Props {
   directoryLocations: string[];

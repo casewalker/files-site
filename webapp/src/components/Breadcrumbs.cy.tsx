@@ -1,4 +1,4 @@
-import Breadcrumbs from "@/components/Breadcrumbs";
+import Breadcrumbs from "@secure-cloud-files/webapp/src/components/Breadcrumbs";
 
 describe("<Breadcrumbs />", () => {
   it("should not have any entries if no locations are provided", () => {

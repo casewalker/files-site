@@ -1,9 +1,9 @@
-import Breadcrumbs from "@/components/Breadcrumbs";
-import FileExplorerMenu from "@/components/FileExplorerMenu";
-import FilesTable from "@/components/FilesTable";
-import NavBarButtons from "@/components/NavBarButtons";
-import { S3ObjectType } from "@/utils/s3FileTypes";
-import { MENU_ICON, X_ICON } from "@/utils/svgs";
+import Breadcrumbs from "@secure-cloud-files/webapp/src/components/Breadcrumbs";
+import FileExplorerMenu from "@secure-cloud-files/webapp/src/components/FileExplorerMenu";
+import FilesTable from "@secure-cloud-files/webapp/src/components/FilesTable";
+import NavBarButtons from "@secure-cloud-files/webapp/src/components/NavBarButtons";
+import { S3ObjectType } from "@secure-cloud-files/webapp/src/utils/s3FileTypes";
+import { MENU_ICON, X_ICON } from "@secure-cloud-files/webapp/src/utils/svgs";
 
 export default function Home() {
   return (

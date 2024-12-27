@@ -1,4 +1,8 @@
-import { NEW_FOLDER_ICON_LARGER, LOGOUT_ICON, UPLOAD_FILE_ICON_LARGER } from "@/utils/svgs";
+import {
+  NEW_FOLDER_ICON_LARGER,
+  LOGOUT_ICON,
+  UPLOAD_FILE_ICON_LARGER,
+} from "@secure-cloud-files/webapp/src/utils/svgs";
 
 export default function NavBarButtons() {
   return (
