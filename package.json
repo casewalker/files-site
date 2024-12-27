@@ -6,7 +6,6 @@
   "license": "AGPL-3.0-or-later",
   "private": true,
   "scripts": {
-    "build": "tsc --build --verbose tsconfig.build.json",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "workspaces": [
