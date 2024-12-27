@@ -1,20 +1,34 @@
 #!/usr/bin/env node
-import * as cdk from "aws-cdk-lib";
-import { InfraStack } from "../lib/infra-stack";
 
-const app = new cdk.App();
-new InfraStack(app, "InfraStack", {
-  /* If you don't specify 'env', this stack will be environment-agnostic.
-   * Account/Region-dependent features and context lookups will not work,
-   * but a single synthesized template can be deployed anywhere. */
+import { App, Stage } from "aws-cdk-lib";
+import { DEPLOYMENT_STAGES, InfraStack } from "../lib/infra-stack";
 
-  /* Uncomment the next line to specialize this stack for the AWS Account
-   * and Region that are implied by the current CLI configuration. */
-  // env: { account: process.env.CDK_DEFAULT_ACCOUNT, region: process.env.CDK_DEFAULT_REGION },
+const app = new App();
 
-  /* Uncomment the next line if you know exactly what Account and Region you
-   * want to deploy the stack to. */
-  env: { account: "196478524922", region: "us-west-2" },
+const stageName = app.node.tryGetContext("stage");
+if (stageName == undefined || stageName === "") {
+  throw new Error(
+    "Context argument 'stage' must be provided to CDK command, " +
+    "please add \"--context stage=<STAGE>\" to the CDK CLI command",
+  );
+}
 
-  /* For more information, see https://docs.aws.amazon.com/cdk/latest/guide/environments.html */
+const supportedStageNames = Object.keys(DEPLOYMENT_STAGES);
+if (!supportedStageNames.includes(stageName)) {
+  throw new Error(
+    "Argument provided for 'stage' was not one of the supported stages. " +
+      `Provided: ${stageName}, supported stages: [${supportedStageNames}]`,
+  );
+}
+const stageConfig = DEPLOYMENT_STAGES[stageName];
+
+const deploymentStage = new Stage(app, stageName, {
+  env: { account: stageConfig.accountId, region: stageConfig.region },
+  stageName,
+});
+
+new InfraStack(deploymentStage, "SecureCloudFilesInfrastructure", {
+  description: "Infrastructure for the Secure Cloud Files site",
+  stageName,
+  stageConfig,
 });

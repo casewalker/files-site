@@ -1,4 +1,4 @@
-import { DOWN_ARROW, FILE_ICON, IMAGE_ICON } from "@/utils/svgs";
+import { DOWN_ARROW, FILE_ICON, IMAGE_ICON } from "@secure-cloud-files/webapp/src/utils/svgs";
 
 interface Props {
   files: string[];

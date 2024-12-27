@@ -1,0 +1,11 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "dist",
+    "paths": {
+      "@secure-cloud-files/*": ["./*"]
+    }
+  },
+  "references": [{ "path": "../infra" }]
+}

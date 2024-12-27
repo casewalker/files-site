@@ -6,11 +6,21 @@
   "license": "AGPL-3.0-or-later",
   "private": true,
   "scripts": {
+    "build": "tsc --build --verbose tsconfig.build.json",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "workspaces": [
     "api",
     "infra",
     "webapp"
-  ]
+  ],
+  "devDependencies": {
+    "@tsconfig/recommended": "1.0.8",
+    "@types/node": "22.10.2",
+    "@typescript-eslint/eslint-plugin": "8.18.1",
+    "eslint": "8.57.1",
+    "prettier": "3.4.2",
+    "ts-node": "10.9.2",
+    "typescript": "5.7.2"
+  }
 }

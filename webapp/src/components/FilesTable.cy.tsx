@@ -1,4 +1,4 @@
-import FilesTable from "@/components/FilesTable";
+import FilesTable from "@secure-cloud-files/webapp/src/components/FilesTable";
 
 describe("<FilesTable />", () => {
   it("should have a table with a correct header", () => {

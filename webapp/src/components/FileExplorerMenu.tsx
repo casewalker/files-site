@@ -1,5 +1,5 @@
-import { type S3Object, S3ObjectType } from "@/utils/s3FileTypes";
-import { FOLDER_ICON_FOR_MENU } from "@/utils/svgs";
+import { type S3Object, S3ObjectType } from "@secure-cloud-files/webapp/src/utils/s3FileTypes";
+import { FOLDER_ICON_FOR_MENU } from "@secure-cloud-files/webapp/src/utils/svgs";
 
 interface Props {
   files: S3Object[];
