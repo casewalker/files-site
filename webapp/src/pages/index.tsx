@@ -22,7 +22,7 @@ export default function Home() {
               <div className="w-full h-full flex">
                 <div className="content-center">
                   <label
-                    className="drawer-button btn btn-square btn-ghost lg:hidden self-start ml-2"
+                    className="drawer-button btn btn-square lg:hidden self-start ml-2"
                     htmlFor="file-explorer-drawer"
                     aria-label="Open menu"
                     title="Open file menu"

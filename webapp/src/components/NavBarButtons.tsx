@@ -1,8 +1,5 @@
-import {
-  NEW_FOLDER_ICON_LARGER,
-  LOGOUT_ICON,
-  UPLOAD_FILE_ICON_LARGER,
-} from "@secure-cloud-files/webapp/src/utils/svgs";
+import { NEW_FOLDER_ICON_LARGER, LOGOUT_ICON } from "@secure-cloud-files/webapp/src/utils/svgs";
+import FileInputButton from "./FileInputButton";
 
 export default function NavBarButtons() {
   return (
@@ -14,10 +11,7 @@ export default function NavBarButtons() {
                 {NEW_FOLDER_ICON_LARGER}
                 <span className="hidden invisible sm:inline sm:visible">New Folder</span>
               </button>
-              <button className="btn" title="Upload files">
-                {UPLOAD_FILE_ICON_LARGER}
-                <span className="hidden invisible sm:inline sm:visible">Upload Files</span>
-              </button>
+              <FileInputButton />
             </div>
             <button className="btn btn-outline" title="Log out">
               {LOGOUT_ICON}
@@ -26,5 +20,5 @@ export default function NavBarButtons() {
           </div>
         </div>
     </nav>
-  );
+);
 };

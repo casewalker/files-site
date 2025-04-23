@@ -21,8 +21,27 @@ Nice-to-haves:
 * User Management controls - change password?
 
 Must have?
-* Limit users to X downloads per day (3?) and Y downloads per week (10?). If someone wants to download more, they'll have to talk to me.
+* Limit users to X downloads per day (3? 10?) and Y downloads per week (20?). If someone wants to download more, they'll have to talk to me.
   * Most easily managed with a DynamoDB table
   * Overrideable on an individual level with some kind of controls
   * Perhaps display how many downloads a user has left?
 * Automatic logout after inactivity
+
+How do files work?
+* Store files raw
+* Create a directory (how is a directory represented?)
+* Store files in a directory
+* Rename file (modifies metadata, not contents)
+* Replace file content (modifies contents, not metadata)
+* Move file (modifies metadata, requires existing directory, warns if there is already a same-name file)
+* Move directory?
+
+Initially, I was thinking I would have one record in Dynamo per file... but now
+I am thinking perhaps I want one record in Dynamo per directory? Maybe actually
+I want two tables, one for file metadata, and one for the directory structure,
+where each directory is an Item, and it contains a list of the file-keys in that
+directory
+
+Copy email design - have top of the table have selection, have each row have a
+selection box, allow for move/delete. At low width, turn column-data into new
+lines on the same row. Add "1-50 of <COUNT>" and pagination.
