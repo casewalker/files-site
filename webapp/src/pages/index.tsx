@@ -16,7 +16,7 @@ export default function Home() {
         />
         <div className="drawer-content">
           <div className={"top-0 h-16 w-full z-30 flex bg-base-100 text-base-content sticky justify-center " +
-              "bg-opacity-75 backdrop-blur-sm transition-shadow duration-100 shadow-sm " +
+              "bg-opacity-75 backdrop-blur-xs transition-shadow duration-100 shadow-xs " +
               "[transform:translate3d(0,0,0)]"}>
             <div className="w-full h-full max-w-7xl">
               <div className="w-full h-full flex">
@@ -48,9 +48,9 @@ export default function Home() {
           <aside className={"w-80 min-h-full z-10 flex flex-col bg-base-100 text-base-content " +
             "scroll-smooth scroll-pt-20"}>
             <header className={"top-0 w-full h-16 z-20 gap-2 px-4 py-2 bg-base-100 sticky items-center " +
-              "font-title text-lg md:text-2xl bg-opacity-75 backdrop-blur-sm transition-shadow " +
-              "duration-100 shadow-sm [transform:translate3d(0,0,0)]"}>
-              <a className="btn btn-ghost text-xl ml-6" title="Home directory">
+              "font-title text-lg md:text-2xl bg-opacity-75 backdrop-blur-xs transition-shadow " +
+              "duration-100 shadow-xs [transform:translate3d(0,0,0)]"}>
+              <a className="btn btn-ghost text-xl ml-6 h-full" title="Home directory">
                 SecureCloudFiles
               </a>
               <label
@@ -62,7 +62,7 @@ export default function Home() {
                 {X_ICON}
               </label>
             </header>
-            <ul className="menu w-full max-w-xs bg-base-200 flex-grow">
+            <ul className="menu w-full max-w-xs bg-base-200 grow">
               <FileExplorerMenu files={[
                 {
                   type: S3ObjectType.DIRECTORY,

@@ -23,7 +23,7 @@ export default function FileExplorerMenu({ files }: Props) {
                   ) : (
                     <ul>
                       <li
-                        className="italic textarea-disabled pb-2 pl-4"
+                        className="italic text-base-content/58 pb-2 pl-4"
                         key={`${s3Object.path}/empty-placeholder`}
                       >
                         (empty folder)
