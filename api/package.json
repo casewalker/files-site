@@ -2,9 +2,18 @@
   "name": "@secure-cloud-files/api",
   "version": "0.1.0",
   "private": true,
+  "scripts": {
+    "test": "vitest"
+  },
   "dependencies": {
-    "@aws-sdk/client-dynamodb": "3.637.0",
-    "@aws-sdk/client-s3": "3.637.0",
-    "@aws-sdk/lib-dynamodb": "3.637.0"
+    "@aws-sdk/client-dynamodb": "3.797.0",
+    "@aws-sdk/client-s3": "3.797.0",
+    "@aws-sdk/client-sts": "3.797.0",
+    "@aws-sdk/lib-dynamodb": "3.797.0",
+    "@aws-sdk/s3-request-presigner": "3.797.0"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "8.10.147",
+    "vitest": "3.1.2"
   }
 }

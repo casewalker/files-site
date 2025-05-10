@@ -5,7 +5,8 @@
     "outDir": "dist",
     "paths": {
       "@secure-cloud-files/*": ["./*"]
-    }
+    },
+    "types": ["vitest/globals"]
   },
   "references": [{ "path": "../infra" }]
 }

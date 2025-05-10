@@ -9,6 +9,7 @@ interface AbstractS3Object {
   path: string;
 }
 
+// TODO is this useful? Is this aligned with the data model? Does the data model need work? Yeah.
 export interface S3File extends AbstractS3Object {
   type: S3ObjectType.FILE;
   lastModified: Date;
