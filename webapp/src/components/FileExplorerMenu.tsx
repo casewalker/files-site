@@ -1,30 +1,30 @@
-import { type S3Object, S3ObjectType } from "@secure-cloud-files/webapp/src/utils/s3FileTypes";
+import { type MyFileSystem, ObjectType } from "@secure-cloud-files/webapp/src/utils/s3FileTypes";
 import { FOLDER_ICON_FOR_MENU } from "@secure-cloud-files/webapp/src/utils/svgs";
 
 interface Props {
-  files: S3Object[];
+  files: MyFileSystem[];
 }
 
 export default function FileExplorerMenu({ files }: Props) {
   return (
     <ul>
-      {files.map((s3Object) => {
-        switch (s3Object.type) {
-          case S3ObjectType.DIRECTORY:
+      {files.map((object) => {
+        switch (object.type) {
+          case ObjectType.DIRECTORY:
             return (
-              <li key={s3Object.path}>
+              <li key={object.pathToDirectory + object.directoryName}>
                 <details>
                   <summary className="gap-1">
                     {FOLDER_ICON_FOR_MENU}
-                    {s3Object.name}
+                    {object.directoryName}
                   </summary>
-                  {(s3Object.contents.length > 0) ? (
-                    <FileExplorerMenu files={s3Object.contents} />
+                  {(object.contents.length > 0) ? (
+                    <FileExplorerMenu files={object.contents} />
                   ) : (
                     <ul>
                       <li
                         className="italic text-base-content/58 pb-2 pl-4"
-                        key={`${s3Object.path}/empty-placeholder`}
+                        key={`${object.pathToDirectory}/empty-placeholder`}
                       >
                         (empty folder)
                       </li>
@@ -33,10 +33,10 @@ export default function FileExplorerMenu({ files }: Props) {
                 </details>
               </li>
             );
-          case S3ObjectType.FILE:
+          case ObjectType.FILE:
             return (
-              <li key={s3Object.path} className="py-2 pl-4">
-                {s3Object.name}
+              <li key={object.filePath} className="py-2 pl-4">
+                {object.fileName}
               </li>
             );
         }

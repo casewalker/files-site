@@ -11,6 +11,7 @@ export default function FileInputButton() {
    if (event.target.files != null) {
      // TODO Handle multiple files
      // TODO get filePath from the current page location
+     // TODO Some kind of seeing the upload status?
      getPresignedUploadLink(event.target.files[0].name, "dir1/")
        .then(uploadUrl => {
          console.info("Upload URL:", uploadUrl);

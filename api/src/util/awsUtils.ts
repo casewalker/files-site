@@ -1,4 +1,4 @@
-import { DynamoDBClient, ScanCommand, type ScanCommandInput } from "@aws-sdk/client-dynamodb";
+import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 import {
   GetObjectCommand,
   ListObjectsV2Command,
@@ -11,6 +11,8 @@ import {
   DynamoDBDocumentClient,
   GetCommand,
   PutCommand,
+  ScanCommand,
+  type ScanCommandInput,
 } from "@aws-sdk/lib-dynamodb";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import {
@@ -22,7 +24,7 @@ import {
 
 interface PartialS3ObjectData {
   key: string;
-  lastModified?: Date;
+  lastModified?: string;
   size?: number;
 }
 
@@ -49,7 +51,11 @@ export const listAllS3Files = async (): Promise<PartialS3ObjectData[]> => {
     if (output.Contents != null) {
       const outputFiles: PartialS3ObjectData[] = output.Contents
         .filter((obj) => obj.Key != null)
-        .map((obj) => ({ key: obj.Key!, size: obj.Size, lastModified: obj.LastModified }));
+        .map((obj) => ({
+          key: obj.Key!,
+          size: obj.Size,
+          lastModified: obj.LastModified?.toISOString(),
+        }));
       allFiles.push(...outputFiles);
     }
     commandInput.ContinuationToken = output.IsTruncated ? output.NextContinuationToken : undefined;

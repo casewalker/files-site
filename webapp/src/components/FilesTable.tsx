@@ -1,7 +1,9 @@
-import { DOWN_ARROW, FILE_ICON, IMAGE_ICON } from "@secure-cloud-files/webapp/src/utils/svgs";
+import { FILE_ICON, FOLDER_ICON, IMAGE_ICON } from "@secure-cloud-files/webapp/src/utils/svgs";
+import { type MyFileSystem, ObjectType } from "@secure-cloud-files/webapp/src/utils/s3FileTypes";
+import DownloadButton from "@secure-cloud-files/webapp/src/components/DownloadButton";
 
 interface Props {
-  files: string[];
+  files: MyFileSystem[];
 }
 
 const IMG_EXTENSIONS = new Set([
@@ -54,25 +56,53 @@ export default function FilesTable({ files }: Props) {
           </tr>
         </thead>
         <tbody>
-          {files.map((file) => (
-            <tr className="hover" key={file}>
-              <td className="text-nowrap">
-                <span className="inline-block align-bottom pb-0.5">
-                  {getFileTypeSvg(file)}
-                </span>
-                <span className="ml-2">
-                  {file}
-                </span>
-              </td>
-              <td>placeholder</td>
-              <td>placeholder</td>
-              <td>
-                <button className="btn btn-circle btn-sm" title="Download file">
-                  {DOWN_ARROW}
-                </button>
-              </td>
-            </tr>
-          ))}
+          {files.map((file) => {
+            switch (file.type) {
+              case ObjectType.FILE:
+                return (
+                  <tr className="hover" key={file.key}>
+                    <td className="text-nowrap">
+                      <span className="inline-block align-bottom pb-0.5">
+                        {getFileTypeSvg(file.fileName)}
+                      </span>
+                      <span className="ml-2">
+                        {file.fileName}
+                      </span>
+                    </td>
+                    <td>{file.createdDate}</td>
+                    <td>{file.lastModified}</td>
+                    <td>
+                      <DownloadButton fileKey={file.key}/>
+                    </td>
+                  </tr>
+                );
+              case ObjectType.DIRECTORY:
+                return (
+                  <tr className="hover" key={file.pathToDirectory + file.directoryName}>
+                    <td className="text-nowrap">
+                      <span className="inline-block align-bottom pb-0.5">
+                        {FOLDER_ICON}
+                      </span>
+                      <span className="ml-2">
+                        {file.directoryName}
+                      </span>
+                    </td>
+                    <td>--</td>
+                    <td>--</td>
+                    <td></td>
+                  </tr>
+                );
+              default:
+                return (
+                  <tr>
+                    <td></td>
+                    <td>--</td>
+                    <td>--</td>
+                    <td></td>
+                  </tr>
+                );
+            }
+          })}
         </tbody>
       </table>
     </div>

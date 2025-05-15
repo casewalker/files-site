@@ -1,24 +1,17 @@
-export enum S3ObjectType {
+import { FileDetails } from "@secure-cloud-files/api/src/util/awsUtils";
+
+export enum ObjectType {
   FILE = "FILE",
   DIRECTORY = "DIRECTORY",
-}
+};
 
-interface AbstractS3Object {
-  type: S3ObjectType;
-  name: string;
-  path: string;
-}
+export type FileObject = { type: ObjectType.FILE } & FileDetails;
 
-// TODO is this useful? Is this aligned with the data model? Does the data model need work? Yeah.
-export interface S3File extends AbstractS3Object {
-  type: S3ObjectType.FILE;
-  lastModified: Date;
-  size: number;
-}
+export type DirectoryObject = {
+  type: ObjectType.DIRECTORY;
+  pathToDirectory: string;
+  directoryName: string;
+  contents: MyFileSystem[];
+};
 
-export interface S3Directory extends AbstractS3Object {
-  type: S3ObjectType.DIRECTORY;
-  contents: S3Object[];
-}
-
-export type S3Object = S3File | S3Directory;
+export type MyFileSystem = FileObject | DirectoryObject;

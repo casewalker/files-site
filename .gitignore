@@ -8,6 +8,7 @@
 
 # testing
 /coverage
+/webapp/cypress/downloads
 
 # next.js
 /webapp/.next/

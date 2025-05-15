@@ -1,37 +1,39 @@
 import FileExplorerMenu from "@secure-cloud-files/webapp/src/components/FileExplorerMenu";
 import {
-  type S3Directory,
-  type S3File,
-  S3ObjectType,
+  type DirectoryObject,
+  type FileObject,
+  ObjectType,
 } from "@secure-cloud-files/webapp/src/utils/s3FileTypes";
 
-const FILE1: S3File = {
-  type: S3ObjectType.FILE,
-  name: "testfile1",
-  lastModified: new Date("2020-01-01"),
+const FILE1: FileObject = {
+  key: "key1",
+  type: ObjectType.FILE,
+  fileName: "testfile1",
+  lastModified: new Date("2020-01-01").toISOString(),
+  createdDate: new Date("2020-01-01").toISOString(),
   size: 1,
-  path: "dir2/dir1/testfile1",
+  filePath: "dir2/dir1/testfile1",
 };
 
-const DIR1: S3Directory = {
-  type: S3ObjectType.DIRECTORY,
-  name: "dir1",
+const DIR1: DirectoryObject = {
+  type: ObjectType.DIRECTORY,
+  directoryName: "dir1",
   contents: [FILE1],
-  path: "dir2/dir1",
+  pathToDirectory: "dir2/dir1",
 };
 
-const EMPTY_DIR: S3Directory = {
-  type: S3ObjectType.DIRECTORY,
-  name: "dir3",
+const EMPTY_DIR: DirectoryObject = {
+  type: ObjectType.DIRECTORY,
+  directoryName: "dir3",
   contents: [],
-  path: "dir2/dir3"
+  pathToDirectory: "dir2/dir3"
 };
 
-const DIR2: S3Directory = {
-  type: S3ObjectType.DIRECTORY,
-  name: "dir2",
+const DIR2: DirectoryObject = {
+  type: ObjectType.DIRECTORY,
+  directoryName: "dir2",
   contents: [DIR1, EMPTY_DIR],
-  path: "dir2"
+  pathToDirectory: "dir2"
 };
 
 describe("<FileExplorerMenu>", () => {

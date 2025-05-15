@@ -35,6 +35,10 @@ How do files work?
 * Replace file content (modifies contents, not metadata)
 * Move file (modifies metadata, requires existing directory, warns if there is already a same-name file)
 * Move directory?
+* Probably create one directory-table "file" for each directory
+* ^ it should contain the file-name and the file-key, it should have consistent
+  naming conventions between directories, it should not be a name available for
+  users, and it should be searchable, probably via key and secondary index
 
 Initially, I was thinking I would have one record in Dynamo per file... but now
 I am thinking perhaps I want one record in Dynamo per directory? Maybe actually
