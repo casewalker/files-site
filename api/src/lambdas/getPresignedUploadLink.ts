@@ -1,19 +1,17 @@
+import { randomUUID } from "node:crypto";
 import {
   createFileDetailsRecord,
   deleteFileDetailsRecord,
   getPresignedS3UploadLink,
-} from "@secure-cloud-files/src/util/awsUtils";
-import {
-  makeErrorResponse,
-  type PresignedUrlApiGatewayHandler,
-} from "@secure-cloud-files/src/util/constants";
-import { randomUUID } from "node:crypto";
+} from "#util/awsUtils.ts";
+import { makeErrorResponse } from "#util/constants.ts";
+import type { PresignedUrlApiGatewayHandler } from "#util/constants.ts";
 
 const createFileKey = (date: Date): string => `${date.getTime()}|${randomUUID()}`;
 
 export const handler: PresignedUrlApiGatewayHandler = async (event) => {
   if (event.queryStringParameters == null) {
-    return makeErrorResponse(400,"Event must have query string parameters");
+    return makeErrorResponse(400, "Event must have query string parameters");
   }
 
   const { fileName, filePath } = event.queryStringParameters;
@@ -37,7 +35,6 @@ export const handler: PresignedUrlApiGatewayHandler = async (event) => {
 
     console.info(`handler: Created upload link for ${fileName} with key ${fileKey}`);
     return { data: { url: link } };
-
   } catch (e) {
     console.error("Error while creating upload URL", e);
     try {

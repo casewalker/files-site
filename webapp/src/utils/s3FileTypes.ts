@@ -1,9 +1,9 @@
-import { FileDetails } from "@secure-cloud-files/api/src/util/awsUtils";
+import type { FileDetails } from "@secure-cloud-files/api/util/awsUtils.ts";
 
 export enum ObjectType {
   FILE = "FILE",
   DIRECTORY = "DIRECTORY",
-};
+}
 
 export type FileObject = { type: ObjectType.FILE } & FileDetails;
 

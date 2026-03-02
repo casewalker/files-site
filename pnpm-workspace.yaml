@@ -1,0 +1,11 @@
+packages:
+  - api
+  - infra
+  - webapp
+
+linkWorkspacePackages: false
+
+onlyBuiltDependencies:
+  - esbuild
+
+savePrefix: ""

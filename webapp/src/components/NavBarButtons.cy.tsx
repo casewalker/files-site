@@ -1,4 +1,4 @@
-import NavBarButtons from "@secure-cloud-files/webapp/src/components/NavBarButtons";
+import NavBarButtons from "#components/NavBarButtons.tsx";
 
 describe("<NavBarButtons />", () => {
   it("has three buttons: new directory, upload a file, and logout", () => {

@@ -1,11 +1,6 @@
-import {
-  getFileDetailsRecord,
-  getPresignedS3DownloadLink,
-} from "@secure-cloud-files/src/util/awsUtils";
-import {
-  makeErrorResponse,
-  type PresignedUrlApiGatewayHandler,
-} from "@secure-cloud-files/src/util/constants";
+import { getFileDetailsRecord, getPresignedS3DownloadLink } from "#util/awsUtils.ts";
+import { makeErrorResponse } from "#util/constants.ts";
+import type { PresignedUrlApiGatewayHandler } from "#util/constants.ts";
 
 export const handler: PresignedUrlApiGatewayHandler = async (event) => {
   if (event.queryStringParameters == null) {
@@ -17,7 +12,7 @@ export const handler: PresignedUrlApiGatewayHandler = async (event) => {
     return makeErrorResponse(
       400,
       `Parameters must include non-empty 'key', got: ${JSON.stringify(event.queryStringParameters)}`,
-      );
+    );
   }
 
   try {
@@ -28,8 +23,7 @@ export const handler: PresignedUrlApiGatewayHandler = async (event) => {
 
     const link = await getPresignedS3DownloadLink(key, record.fileName);
     console.info(`handler: Created download link for file ${key}`);
-    return {data: {url: link}};
-
+    return { data: { url: link } };
   } catch (e) {
     console.error("Error while getting presigned download link", e);
     return makeErrorResponse(500, "An error occurred while getting the download URL");

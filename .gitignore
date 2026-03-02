@@ -2,13 +2,14 @@
 
 # dependencies
 /node_modules
+node_modules/
 /.pnp
 .pnp.js
-.yarn/install-state.gz
 
 # testing
 /coverage
 /webapp/cypress/downloads
+.eslintcache
 
 # next.js
 /webapp/.next/
@@ -25,6 +26,7 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+.pnpm-debug.log*
 
 # local env files
 .env*.local
@@ -39,6 +41,3 @@ next-env.d.ts
 # cdk stuff
 /infra/.cdk.staging
 /infra/cdk.out
-/infra/**/*.js
-!/infra/jest.config.js
-/infra/**/*.d.ts

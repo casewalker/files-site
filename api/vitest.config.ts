@@ -1,19 +1,9 @@
-import path from "node:path";
-import { defineConfig } from "vitest/config";
+import { defineProject } from "vitest/config";
 
-export default defineConfig({
-  esbuild: {
-    target: "esnext",
-  },
+export default defineProject({
   test: {
-    globals: true,
     environment: "node",
-    silent: "passed-only",
-    pool: "threads",
-  },
-  resolve: {
-    alias: {
-      "@secure-cloud-files/src": path.resolve(__dirname, "./src"),
-    },
+    globals: true,
+    name: { label: "api/unit", color: "yellow" },
   },
 });

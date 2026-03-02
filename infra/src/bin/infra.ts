@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import { App, Stage } from "aws-cdk-lib";
-import { DEPLOYMENT_STAGES, InfraStack } from "../lib/infra-stack";
+import { DEPLOYMENT_STAGES, InfraStack } from "#lib/infra-stack.ts";
 
 const app = new App();
 
@@ -9,7 +9,7 @@ const stageName = app.node.tryGetContext("stage");
 if (stageName == undefined || stageName === "") {
   throw new Error(
     "Context argument 'stage' must be provided to CDK command, " +
-    "please add \"--context stage=<STAGE>\" to the CDK CLI command",
+      'please add "--context stage=<STAGE>" to the CDK CLI command',
   );
 }
 

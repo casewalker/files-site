@@ -1,22 +1,19 @@
-import { handler } from "@secure-cloud-files/src/lambdas/listFiles";
-import {
-  listAllS3Files,
-  scanAllFileDetailsRecords,
-} from "@secure-cloud-files/src/util/awsUtils";
-import { APIGatewayProxyEventV2WithJWTAuthorizer } from "aws-lambda";
+import type { APIGatewayProxyEventV2WithJWTAuthorizer } from "aws-lambda";
+import { handler } from "#lambdas/listFiles.ts";
+import { listAllS3Files, scanAllFileDetailsRecords } from "#util/awsUtils.ts";
 
 const DUMMY_EVENT = {} as APIGatewayProxyEventV2WithJWTAuthorizer;
 
-vi.mock("@secure-cloud-files/src/util/awsUtils");
+vi.mock("#util/awsUtils.ts");
 
 afterEach(vi.resetAllMocks);
 
 describe(handler, () => {
   it("returns a list of files", async () => {
     vi.mocked(listAllS3Files).mockResolvedValue([
-      { key: "1111", size: 10, lastModified: new Date(1) },
-      { key: "2222", size: 11, lastModified: new Date(2) },
-      { key: "3333", size: 12, lastModified: new Date(3) },
+      { key: "1111", size: 10, lastModified: new Date(1).toISOString() },
+      { key: "2222", size: 11, lastModified: new Date(2).toISOString() },
+      { key: "3333", size: 12, lastModified: new Date(3).toISOString() },
     ]);
     vi.mocked(scanAllFileDetailsRecords).mockResolvedValue([
       { key: "1111", createdDate: "2025-01-01T00:00:01Z", fileName: "a.png", filePath: "d1/" },
@@ -34,7 +31,7 @@ describe(handler, () => {
       filePath: "d1/",
       size: 10,
       createdDate: "2025-01-01T00:00:01Z",
-      lastModified: new Date(1),
+      lastModified: new Date(1).toISOString(),
     });
     expect(files[1]).toEqual({
       key: "2222",
@@ -42,7 +39,7 @@ describe(handler, () => {
       filePath: "d2/",
       size: 11,
       createdDate: "2025-01-01T00:00:02Z",
-      lastModified: new Date(2),
+      lastModified: new Date(2).toISOString(),
     });
     expect(files[2]).toEqual({
       key: "3333",
@@ -50,15 +47,15 @@ describe(handler, () => {
       filePath: "d3/",
       size: 12,
       createdDate: "2025-01-01T00:00:03Z",
-      lastModified: new Date(3),
+      lastModified: new Date(3).toISOString(),
     });
   });
 
   it("ignores unmatched S3 results", async () => {
     vi.mocked(listAllS3Files).mockResolvedValue([
-      { key: "1111", size: 10, lastModified: new Date(1) },
-      { key: "2222", size: 11, lastModified: new Date(2) },
-      { key: "3333", size: 12, lastModified: new Date(3) },
+      { key: "1111", size: 10, lastModified: new Date(1).toISOString() },
+      { key: "2222", size: 11, lastModified: new Date(2).toISOString() },
+      { key: "3333", size: 12, lastModified: new Date(3).toISOString() },
     ]);
     vi.mocked(scanAllFileDetailsRecords).mockResolvedValue([
       { key: "1111", createdDate: "2025-01-01T00:00:01Z", fileName: "a.png", filePath: "d1/" },
@@ -73,7 +70,7 @@ describe(handler, () => {
 
   it("ignores unmatched DB results", async () => {
     vi.mocked(listAllS3Files).mockResolvedValue([
-      { key: "2222", size: 11, lastModified: new Date(2) },
+      { key: "2222", size: 11, lastModified: new Date(2).toISOString() },
     ]);
     vi.mocked(scanAllFileDetailsRecords).mockResolvedValue([
       { key: "1111", createdDate: "2025-01-01T00:00:01Z", fileName: "a.png", filePath: "d1/" },
@@ -91,7 +88,7 @@ describe(handler, () => {
   it.each([
     [
       listAllS3Files.name,
-      () => {
+      (): void => {
         vi.mocked(listAllS3Files).mockResolvedValue([]);
         vi.mocked(scanAllFileDetailsRecords).mockResolvedValue([
           { key: "1111", createdDate: "2025-01-01T00:00:01Z", fileName: "a.png", filePath: "d1/" },
@@ -100,9 +97,9 @@ describe(handler, () => {
     ],
     [
       scanAllFileDetailsRecords.name,
-      () => {
+      (): void => {
         vi.mocked(listAllS3Files).mockResolvedValue([
-          { key: "1111", size: 10, lastModified: new Date(1) },
+          { key: "1111", size: 10, lastModified: new Date(1).toISOString() },
         ]);
         vi.mocked(scanAllFileDetailsRecords).mockResolvedValue([]);
       },
@@ -114,12 +111,12 @@ describe(handler, () => {
     assert("data" in output, "Output should contain the file data");
     const files = output.data.files;
     expect(files.length).toBe(0);
-  })
+  });
 
   it.each([
     [
       listAllS3Files.name,
-      () => {
+      (): void => {
         vi.mocked(listAllS3Files).mockRejectedValue(new Error("DynamoDB error"));
         vi.mocked(scanAllFileDetailsRecords).mockResolvedValue([
           { key: "1111", createdDate: "2025-01-01T00:00:01Z", fileName: "a.png", filePath: "d1/" },
@@ -128,9 +125,9 @@ describe(handler, () => {
     ],
     [
       scanAllFileDetailsRecords.name,
-      () => {
+      (): void => {
         vi.mocked(listAllS3Files).mockResolvedValue([
-          { key: "1111", size: 10, lastModified: new Date(1) },
+          { key: "1111", size: 10, lastModified: new Date(1).toISOString() },
         ]);
         vi.mocked(scanAllFileDetailsRecords).mockRejectedValue(new Error("S3 error"));
       },

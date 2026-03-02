@@ -2,25 +2,25 @@ import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 import {
   GetObjectCommand,
   ListObjectsV2Command,
-  type ListObjectsV2CommandInput,
   PutObjectCommand,
   S3Client,
 } from "@aws-sdk/client-s3";
+import type { ListObjectsV2CommandInput } from "@aws-sdk/client-s3";
 import {
   DeleteCommand,
   DynamoDBDocumentClient,
   GetCommand,
   PutCommand,
   ScanCommand,
-  type ScanCommandInput,
 } from "@aws-sdk/lib-dynamodb";
+import type { ScanCommandInput } from "@aws-sdk/lib-dynamodb";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import {
   FILE_DETAILS_TABLE,
   PRESIGNED_URL_EXPIRATION_SECONDS,
   REGION,
   S3_FILES_BUCKET,
-} from "@secure-cloud-files/api/src/util/constants";
+} from "#util/constants.ts";
 
 interface PartialS3ObjectData {
   key: string;
@@ -49,13 +49,13 @@ export const listAllS3Files = async (): Promise<PartialS3ObjectData[]> => {
   do {
     const output = await s3Client.send(new ListObjectsV2Command(commandInput));
     if (output.Contents != null) {
-      const outputFiles: PartialS3ObjectData[] = output.Contents
-        .filter((obj) => obj.Key != null)
-        .map((obj) => ({
-          key: obj.Key!,
-          size: obj.Size,
-          lastModified: obj.LastModified?.toISOString(),
-        }));
+      const outputFiles: PartialS3ObjectData[] = output.Contents.filter(
+        (obj) => obj.Key != null,
+      ).map((obj) => ({
+        key: obj.Key!,
+        size: obj.Size,
+        lastModified: obj.LastModified?.toISOString(),
+      }));
       allFiles.push(...outputFiles);
     }
     commandInput.ContinuationToken = output.IsTruncated ? output.NextContinuationToken : undefined;
@@ -64,7 +64,10 @@ export const listAllS3Files = async (): Promise<PartialS3ObjectData[]> => {
   return allFiles;
 };
 
-export const getPresignedS3DownloadLink = async (objectName: string, fileName: string): Promise<string> => {
+export const getPresignedS3DownloadLink = async (
+  objectName: string,
+  fileName: string,
+): Promise<string> => {
   const presignedUrl = await getSignedUrl(
     s3Client,
     new GetObjectCommand({
@@ -91,17 +94,21 @@ export const getPresignedS3UploadLink = async (objectName: string): Promise<stri
 // DynamoDB
 
 export const createFileDetailsRecord = async (record: FileDetailsRecord): Promise<void> => {
-  await dynamoDbClient.send(new PutCommand({
-    TableName: FILE_DETAILS_TABLE,
-    Item: record,
-  }));
+  await dynamoDbClient.send(
+    new PutCommand({
+      TableName: FILE_DETAILS_TABLE,
+      Item: record,
+    }),
+  );
 };
 
 export const getFileDetailsRecord = async (key: string): Promise<FileDetailsRecord | undefined> => {
-  const output = await dynamoDbClient.send(new GetCommand({
-    TableName: FILE_DETAILS_TABLE,
-    Key: { key },
-  }));
+  const output = await dynamoDbClient.send(
+    new GetCommand({
+      TableName: FILE_DETAILS_TABLE,
+      Key: { key },
+    }),
+  );
   return output.Item as FileDetailsRecord;
 };
 
@@ -121,8 +128,10 @@ export const scanAllFileDetailsRecords = async (): Promise<FileDetailsRecord[]> 
 };
 
 export const deleteFileDetailsRecord = async (key: string): Promise<void> => {
-  await dynamoDbClient.send(new DeleteCommand({
-    TableName: FILE_DETAILS_TABLE,
-    Key: { key },
-  }));
+  await dynamoDbClient.send(
+    new DeleteCommand({
+      TableName: FILE_DETAILS_TABLE,
+      Key: { key },
+    }),
+  );
 };

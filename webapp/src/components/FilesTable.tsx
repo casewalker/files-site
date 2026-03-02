@@ -1,6 +1,8 @@
-import { FILE_ICON, FOLDER_ICON, IMAGE_ICON } from "@secure-cloud-files/webapp/src/utils/svgs";
-import { type MyFileSystem, ObjectType } from "@secure-cloud-files/webapp/src/utils/s3FileTypes";
-import DownloadButton from "@secure-cloud-files/webapp/src/components/DownloadButton";
+import type { JSX } from "react";
+import { FILE_ICON, FOLDER_ICON, IMAGE_ICON } from "#utils/svgs.tsx";
+import { ObjectType } from "#utils/s3FileTypes.ts";
+import type { MyFileSystem } from "#utils/s3FileTypes.ts";
+import DownloadButton from "#components/DownloadButton.tsx";
 
 interface Props {
   files: MyFileSystem[];
@@ -38,12 +40,12 @@ const IMG_EXTENSIONS = new Set([
   "webp",
 ]);
 
-const getFileTypeSvg = (filename: string) => {
+const getFileTypeSvg = (filename: string): JSX.Element => {
   const extension = filename.replaceAll(/.*\./g, "").toLowerCase();
   return IMG_EXTENSIONS.has(extension) ? IMAGE_ICON : FILE_ICON;
 };
 
-export default function FilesTable({ files }: Props) {
+export default function FilesTable({ files }: Props): JSX.Element {
   return (
     <div className="overflow-x-auto">
       <table className="table">
@@ -65,14 +67,12 @@ export default function FilesTable({ files }: Props) {
                       <span className="inline-block align-bottom pb-0.5">
                         {getFileTypeSvg(file.fileName)}
                       </span>
-                      <span className="ml-2">
-                        {file.fileName}
-                      </span>
+                      <span className="ml-2">{file.fileName}</span>
                     </td>
                     <td>{file.createdDate}</td>
                     <td>{file.lastModified}</td>
                     <td>
-                      <DownloadButton fileKey={file.key}/>
+                      <DownloadButton fileKey={file.key} />
                     </td>
                   </tr>
                 );
@@ -80,12 +80,8 @@ export default function FilesTable({ files }: Props) {
                 return (
                   <tr className="hover" key={file.pathToDirectory + file.directoryName}>
                     <td className="text-nowrap">
-                      <span className="inline-block align-bottom pb-0.5">
-                        {FOLDER_ICON}
-                      </span>
-                      <span className="ml-2">
-                        {file.directoryName}
-                      </span>
+                      <span className="inline-block align-bottom pb-0.5">{FOLDER_ICON}</span>
+                      <span className="ml-2">{file.directoryName}</span>
                     </td>
                     <td>--</td>
                     <td>--</td>
@@ -107,4 +103,4 @@ export default function FilesTable({ files }: Props) {
       </table>
     </div>
   );
-};
+}
