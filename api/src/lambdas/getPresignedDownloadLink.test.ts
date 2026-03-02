@@ -1,9 +1,6 @@
-import { makeApiGatewayProxyEvent } from "@secure-cloud-files/src/__tests__/factories";
-import { handler } from "@secure-cloud-files/src/lambdas/getPresignedDownloadLink";
-import {
-  getFileDetailsRecord,
-  getPresignedS3DownloadLink,
-} from "@secure-cloud-files/src/util/awsUtils";
+import { makeApiGatewayProxyEvent } from "#__tests__/factories.ts";
+import { handler } from "#lambdas/getPresignedDownloadLink.ts";
+import { getFileDetailsRecord, getPresignedS3DownloadLink } from "#util/awsUtils.ts";
 
 const DUMMY_RECORD = {
   key: "1700000000000|0123-456-789-abc-def",
@@ -12,7 +9,7 @@ const DUMMY_RECORD = {
   filePath: "dir1/",
 };
 
-vi.mock("@secure-cloud-files/src/util/awsUtils");
+vi.mock("#util/awsUtils.ts");
 
 afterEach(vi.resetAllMocks);
 
@@ -29,10 +26,10 @@ describe(handler, () => {
   });
 
   it.each([
-    ["there's no queryStringParameters" , makeApiGatewayProxyEvent()],
-    ["'key' is missing" , makeApiGatewayProxyEvent({ somethingElse: "um, hi" })],
-    ["'key' is undefined" , makeApiGatewayProxyEvent({ key: undefined  })],
-    ["'key' is blank" , makeApiGatewayProxyEvent({ key: " " })],
+    ["there's no queryStringParameters", makeApiGatewayProxyEvent()],
+    ["'key' is missing", makeApiGatewayProxyEvent({ somethingElse: "um, hi" })],
+    ["'key' is undefined", makeApiGatewayProxyEvent({ key: undefined })],
+    ["'key' is blank", makeApiGatewayProxyEvent({ key: " " })],
   ])("returns a 400 error if %s", async (_testName, event) => {
     vi.mocked(getFileDetailsRecord).mockResolvedValue(DUMMY_RECORD);
     vi.mocked(getPresignedS3DownloadLink).mockResolvedValue("https://example.com/fakeDownload");
@@ -46,14 +43,14 @@ describe(handler, () => {
   it.each([
     [
       getFileDetailsRecord.name,
-      () => {
+      (): void => {
         vi.mocked(getFileDetailsRecord).mockRejectedValue(new Error("DynamoDB error"));
         vi.mocked(getPresignedS3DownloadLink).mockResolvedValue("https://example.com/fakeDownload");
       },
     ],
     [
       getPresignedS3DownloadLink.name,
-      () => {
+      (): void => {
         vi.mocked(getFileDetailsRecord).mockResolvedValue(DUMMY_RECORD);
         vi.mocked(getPresignedS3DownloadLink).mockRejectedValue(new Error("S3 error"));
       },

@@ -1,5 +1,5 @@
-import FilesTable from "@secure-cloud-files/webapp/src/components/FilesTable";
-import { ObjectType } from "@secure-cloud-files/webapp/src/utils/s3FileTypes";
+import FilesTable from "#components/FilesTable.tsx";
+import { ObjectType } from "#utils/s3FileTypes.ts";
 
 describe("<FilesTable />", () => {
   it("should have a table with a correct header", () => {
@@ -32,9 +32,7 @@ describe("<FilesTable />", () => {
 
   it("should have the Image SVGs for an image", () => {
     const type = ObjectType.FILE as const;
-    const files = [
-      { key: "k1", fileName: "file1.png", filePath: "dir1/", createdDate: "", type },
-    ];
+    const files = [{ key: "k1", fileName: "file1.png", filePath: "dir1/", createdDate: "", type }];
     cy.mount(<FilesTable files={files} />);
     cy.get("tbody > tr").eq(0).should("contain.text", "file1.png");
     cy.get('svg[data-testid="image-svg"]').should("exist");
@@ -43,9 +41,7 @@ describe("<FilesTable />", () => {
 
   it("should have the File SVGs for a text file", () => {
     const type = ObjectType.FILE as const;
-    const files = [
-      { key: "k2", fileName: "file2.txt", filePath: "dir2/", createdDate: "", type },
-    ];
+    const files = [{ key: "k2", fileName: "file2.txt", filePath: "dir2/", createdDate: "", type }];
     cy.mount(<FilesTable files={files} />);
     cy.get("tbody > tr").eq(0).should("contain.text", "file2.txt");
     cy.get('svg[data-testid="file-svg"]').should("exist");

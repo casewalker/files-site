@@ -1,9 +1,6 @@
-import FileExplorerMenu from "@secure-cloud-files/webapp/src/components/FileExplorerMenu";
-import {
-  type DirectoryObject,
-  type FileObject,
-  ObjectType,
-} from "@secure-cloud-files/webapp/src/utils/s3FileTypes";
+import FileExplorerMenu from "#components/FileExplorerMenu.tsx";
+import { ObjectType } from "#utils/s3FileTypes.ts";
+import type { DirectoryObject, FileObject } from "#utils/s3FileTypes.ts";
 
 const FILE1: FileObject = {
   key: "key1",
@@ -26,14 +23,14 @@ const EMPTY_DIR: DirectoryObject = {
   type: ObjectType.DIRECTORY,
   directoryName: "dir3",
   contents: [],
-  pathToDirectory: "dir2/dir3"
+  pathToDirectory: "dir2/dir3",
 };
 
 const DIR2: DirectoryObject = {
   type: ObjectType.DIRECTORY,
   directoryName: "dir2",
   contents: [DIR1, EMPTY_DIR],
-  pathToDirectory: "dir2"
+  pathToDirectory: "dir2",
 };
 
 describe("<FileExplorerMenu>", () => {
@@ -71,16 +68,13 @@ describe("<FileExplorerMenu>", () => {
     cy.get("ul").should("contain.html", "li");
     cy.get("li").should("have.length", 5);
     cy.contains("details", "dir2").should("be.visible");
-    cy.contains("details", "dir2").children("ul")
-      .contains("dir1").should("be.visible");
+    cy.contains("details", "dir2").children("ul").contains("dir1").should("be.visible");
 
     cy.contains("details", "dir1").should("be.visible");
-    cy.contains("details", "dir1").children("ul")
-      .contains("testfile1").should("be.visible");
+    cy.contains("details", "dir1").children("ul").contains("testfile1").should("be.visible");
 
     cy.contains("details", "dir3").should("be.visible");
-    cy.contains("details", "dir3").children("ul")
-      .contains("(empty folder)").should("be.visible");
+    cy.contains("details", "dir3").children("ul").contains("(empty folder)").should("be.visible");
 
     cy.get("details").should("have.length", 3);
     cy.get("details").eq(0).should("not.have.attr", "open");

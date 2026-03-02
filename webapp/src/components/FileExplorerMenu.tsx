@@ -1,11 +1,13 @@
-import { type MyFileSystem, ObjectType } from "@secure-cloud-files/webapp/src/utils/s3FileTypes";
-import { FOLDER_ICON_FOR_MENU } from "@secure-cloud-files/webapp/src/utils/svgs";
+import type { JSX } from "react";
+import { ObjectType } from "#utils/s3FileTypes.ts";
+import type { MyFileSystem } from "#utils/s3FileTypes.ts";
+import { FOLDER_ICON_FOR_MENU } from "#utils/svgs.tsx";
 
 interface Props {
   files: MyFileSystem[];
 }
 
-export default function FileExplorerMenu({ files }: Props) {
+export default function FileExplorerMenu({ files }: Props): JSX.Element {
   return (
     <ul>
       {files.map((object) => {
@@ -18,7 +20,7 @@ export default function FileExplorerMenu({ files }: Props) {
                     {FOLDER_ICON_FOR_MENU}
                     {object.directoryName}
                   </summary>
-                  {(object.contents.length > 0) ? (
+                  {object.contents.length > 0 ? (
                     <FileExplorerMenu files={object.contents} />
                   ) : (
                     <ul>
@@ -35,7 +37,7 @@ export default function FileExplorerMenu({ files }: Props) {
             );
           case ObjectType.FILE:
             return (
-              <li key={object.filePath} className="py-2 pl-4">
+              <li key={object.filePath + object.fileName} className="py-2 pl-4">
                 {object.fileName}
               </li>
             );
@@ -43,4 +45,4 @@ export default function FileExplorerMenu({ files }: Props) {
       })}
     </ul>
   );
-};
+}

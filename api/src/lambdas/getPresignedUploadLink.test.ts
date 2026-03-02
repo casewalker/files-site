@@ -1,14 +1,14 @@
-import { makeApiGatewayProxyEvent } from "@secure-cloud-files/src/__tests__/factories";
-import { handler } from "@secure-cloud-files/src/lambdas/getPresignedUploadLink";
+import { randomUUID } from "node:crypto";
+import { makeApiGatewayProxyEvent } from "#__tests__/factories.ts";
+import { handler } from "#lambdas/getPresignedUploadLink.ts";
 import {
   createFileDetailsRecord,
   deleteFileDetailsRecord,
   getPresignedS3UploadLink,
-} from "@secure-cloud-files/src/util/awsUtils";
-import { randomUUID } from "node:crypto";
+} from "#util/awsUtils.ts";
 
 vi.mock("node:crypto");
-vi.mock("@secure-cloud-files/src/util/awsUtils");
+vi.mock("#util/awsUtils.ts");
 vi.useFakeTimers().setSystemTime(1700000000000);
 
 afterEach(vi.resetAllMocks);
@@ -35,13 +35,13 @@ describe(handler, () => {
   });
 
   it.each([
-    ["there's no queryStringParameters" , makeApiGatewayProxyEvent()],
-    ["fileName is missing" , makeApiGatewayProxyEvent({ filePath: "/" })],
-    ["fileName is undefined" , makeApiGatewayProxyEvent({ fileName: undefined, filePath: "/" })],
-    ["fileName is blank" , makeApiGatewayProxyEvent({ fileName: " ", filePath: "/" })],
-    ["filePath is missing" , makeApiGatewayProxyEvent({ fileName: "hi.txt" })],
-    ["filePath is undefined" , makeApiGatewayProxyEvent({ fileName: "a.c", filePath: undefined })],
-    ["filePath is blank" , makeApiGatewayProxyEvent({ fileName: "hi.txt", filePath: " " })],
+    ["there's no queryStringParameters", makeApiGatewayProxyEvent()],
+    ["fileName is missing", makeApiGatewayProxyEvent({ filePath: "/" })],
+    ["fileName is undefined", makeApiGatewayProxyEvent({ fileName: undefined, filePath: "/" })],
+    ["fileName is blank", makeApiGatewayProxyEvent({ fileName: " ", filePath: "/" })],
+    ["filePath is missing", makeApiGatewayProxyEvent({ fileName: "hi.txt" })],
+    ["filePath is undefined", makeApiGatewayProxyEvent({ fileName: "a.c", filePath: undefined })],
+    ["filePath is blank", makeApiGatewayProxyEvent({ fileName: "hi.txt", filePath: " " })],
   ])("returns a 400 error if %s", async (_testName, event) => {
     vi.mocked(getPresignedS3UploadLink).mockResolvedValue("https://example.com/fakeUpload");
 
@@ -55,20 +55,20 @@ describe(handler, () => {
   it.each([
     [
       "if createFileDetailsRecord throws an error",
-      () => {
+      (): void => {
         vi.mocked(createFileDetailsRecord).mockRejectedValue(new Error("DynamoDB error"));
         vi.mocked(getPresignedS3UploadLink).mockResolvedValue("https://example.com/fakeUpload");
       },
     ],
     [
       "if getPresignedS3UploadLink throws an error",
-      () => {
+      (): void => {
         vi.mocked(getPresignedS3UploadLink).mockRejectedValue(new Error("S3 error"));
       },
     ],
     [
       "still, even if deleteFileDetailsRecord also throws an error",
-      () => {
+      (): void => {
         vi.mocked(getPresignedS3UploadLink).mockRejectedValue(new Error("S3 error"));
         vi.mocked(deleteFileDetailsRecord).mockRejectedValue(new Error("DynamoDB error"));
       },

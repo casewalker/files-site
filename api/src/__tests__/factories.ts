@@ -1,6 +1,8 @@
 import type { APIGatewayProxyEventV2WithJWTAuthorizer } from "aws-lambda";
 
-export const makeApiGatewayProxyEvent = (queryStringParameters?: Record<string, string | undefined>): APIGatewayProxyEventV2WithJWTAuthorizer => ({
+export const makeApiGatewayProxyEvent = (
+  queryStringParameters?: Record<string, string | undefined>,
+): APIGatewayProxyEventV2WithJWTAuthorizer => ({
   queryStringParameters,
   headers: {},
   isBase64Encoded: false,
@@ -12,8 +14,8 @@ export const makeApiGatewayProxyEvent = (queryStringParameters?: Record<string, 
       integrationLatency: 0,
       jwt: {
         claims: {},
-        scopes: []
-      }
+        scopes: [],
+      },
     },
     accountId: "123",
     apiId: "abc",
@@ -24,14 +26,14 @@ export const makeApiGatewayProxyEvent = (queryStringParameters?: Record<string, 
       path: "/test",
       protocol: "HTTPS",
       sourceIp: "1.2.3.4",
-      userAgent: "Mozilla/5.0"
+      userAgent: "Mozilla/5.0",
     },
     requestId: "123",
     routeKey: "abc",
     stage: "",
     time: "",
-    timeEpoch: 0
+    timeEpoch: 0,
   },
   routeKey: "",
-  version: ""
+  version: "",
 });

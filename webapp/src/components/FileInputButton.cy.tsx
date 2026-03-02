@@ -1,4 +1,4 @@
-import FileInputButton from "@secure-cloud-files/webapp/src/components/FileInputButton";
+import FileInputButton from "#components/FileInputButton.tsx";
 
 describe("<FileInputButton />", () => {
   it("should have a button and a hidden file-input", () => {
@@ -24,8 +24,8 @@ describe("<FileInputButton />", () => {
     cy.get("input").selectFile("cypress/fixtures/testFile.json");
 
     cy.wait("@getPresignedLink");
-    cy.wait("@upload").then((interception) =>
-      interception.response?.body === "great file upload, thank you",
+    cy.wait("@upload").then(
+      (interception) => interception.response?.body === "great file upload, thank you",
     );
   });
 });

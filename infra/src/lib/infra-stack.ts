@@ -6,7 +6,7 @@ import * as lambda from "aws-cdk-lib/aws-lambda";
 import * as njs from "aws-cdk-lib/aws-lambda-nodejs";
 import * as logs from "aws-cdk-lib/aws-logs";
 import * as s3 from "aws-cdk-lib/aws-s3";
-import { Construct } from "constructs";
+import type { Construct } from "constructs";
 
 interface StageConfig {
   accountId: string;
@@ -39,11 +39,13 @@ export class InfraStack extends cdk.Stack {
       encryption: s3.BucketEncryption.S3_MANAGED,
       enforceSSL: true,
       versioned: true,
-      cors: [{
-        allowedHeaders: ["*"],
-        allowedMethods: [s3.HttpMethods.PUT],
-        allowedOrigins: ["http://localhost:3000"],
-      }],
+      cors: [
+        {
+          allowedHeaders: ["*"],
+          allowedMethods: [s3.HttpMethods.PUT],
+          allowedOrigins: ["http://localhost:3000"],
+        },
+      ],
     });
 
     const fileDetailsTable = new dynamodb.TableV2(this, "FileDetailsTable", {
@@ -55,7 +57,10 @@ export class InfraStack extends cdk.Stack {
     // TODO: Use this I guess? Creating directories is independent of creating files.
     const directoryDetailsTable = new dynamodb.TableV2(this, "DirectoryDetailsTable", {
       tableName: `DirectoryDetails-${canonicalStageName}`,
-      partitionKey: { name: "directoryPath", type: dynamodb.AttributeType.STRING },
+      partitionKey: {
+        name: "directoryPath",
+        type: dynamodb.AttributeType.STRING,
+      },
       deletionProtection: true,
     });
 
@@ -77,44 +82,53 @@ export class InfraStack extends cdk.Stack {
       retention: logs.RetentionDays.INFINITE,
     });
 
-    const logGroupGetPresignedDownloadLink = new logs.LogGroup(this, "GetPresignedDownloadLink-LogGroup", {
-      logGroupName: `/aws/lambda/${functionNames.getPresignedDownloadLink}`,
-      retention: logs.RetentionDays.INFINITE,
-    });
+    const logGroupGetPresignedDownloadLink = new logs.LogGroup(
+      this,
+      "GetPresignedDownloadLink-LogGroup",
+      {
+        logGroupName: `/aws/lambda/${functionNames.getPresignedDownloadLink}`,
+        retention: logs.RetentionDays.INFINITE,
+      },
+    );
 
-    const logGroupGetPresignedUploadLink = new logs.LogGroup(this, "GetPresignedUploadLink-LogGroup", {
-      logGroupName: `/aws/lambda/${functionNames.getPresignedUploadLink}`,
-      retention: logs.RetentionDays.INFINITE,
-    });
+    const logGroupGetPresignedUploadLink = new logs.LogGroup(
+      this,
+      "GetPresignedUploadLink-LogGroup",
+      {
+        logGroupName: `/aws/lambda/${functionNames.getPresignedUploadLink}`,
+        retention: logs.RetentionDays.INFINITE,
+      },
+    );
 
     const lambdas = {
-      listFilesLambda:
-        new njs.NodejsFunction(this, "ListFilesFunction", {
-          functionName: functionNames.listFiles,
-          entry: "../api/src/lambdas/listFiles.ts",
-          runtime: lambda.Runtime.NODEJS_20_X,
-          memorySize: 766,
-          logGroup: logGroupListFiles,
-          environment: lambdaEnvironment,
-        }),
-      getPresignedDownloadLinkLambda:
-        new njs.NodejsFunction(this, "GetPresignedDownloadLinkFunction", {
+      listFilesLambda: new njs.NodejsFunction(this, "ListFilesFunction", {
+        functionName: functionNames.listFiles,
+        entry: "../api/src/lambdas/listFiles.ts",
+        runtime: lambda.Runtime.NODEJS_20_X,
+        memorySize: 766,
+        logGroup: logGroupListFiles,
+        environment: lambdaEnvironment,
+      }),
+      getPresignedDownloadLinkLambda: new njs.NodejsFunction(
+        this,
+        "GetPresignedDownloadLinkFunction",
+        {
           functionName: functionNames.getPresignedDownloadLink,
           entry: "../api/src/lambdas/getPresignedDownloadLink.ts",
           runtime: lambda.Runtime.NODEJS_20_X,
           memorySize: 766,
           logGroup: logGroupGetPresignedDownloadLink,
           environment: lambdaEnvironment,
-        }),
-      getPresignedUploadLinkLambda:
-        new njs.NodejsFunction(this, "GetPresignedUploadLinkFunction", {
-          functionName: functionNames.getPresignedUploadLink,
-          entry: "../api/src/lambdas/getPresignedUploadLink.ts",
-          runtime: lambda.Runtime.NODEJS_20_X,
-          memorySize: 766,
-          logGroup: logGroupGetPresignedUploadLink,
-          environment: lambdaEnvironment,
-        }),
+        },
+      ),
+      getPresignedUploadLinkLambda: new njs.NodejsFunction(this, "GetPresignedUploadLinkFunction", {
+        functionName: functionNames.getPresignedUploadLink,
+        entry: "../api/src/lambdas/getPresignedUploadLink.ts",
+        runtime: lambda.Runtime.NODEJS_20_X,
+        memorySize: 766,
+        logGroup: logGroupGetPresignedUploadLink,
+        environment: lambdaEnvironment,
+      }),
     };
 
     // The HTTP API, Cognito Authorizer, and parts required to connect Lambdas to the Authorizer
@@ -134,11 +148,11 @@ export class InfraStack extends cdk.Stack {
       },
     });
 
-    // const jwtIssuer = `https://cognito-idp.${props.stageConfig.region}.amazonaws.com/${undefined}`; // todo stuff?
+    // const jwtIssuer = `https://cognito-idp.${props.stageConfig.region}.amazonaws.com/${undefined}`; // todo: stuff?
     //
     // const cognitoAuthorizer = new apiAuthz.HttpJwtAuthorizer("CognitoAuthorizer", jwtIssuer, {
     //   authorizerName: "CognitoAuthorizer",
-    //   jwtAudience: [], // TODO fill in
+    //   jwtAudience: [], // TODO: fill in
     //   identitySource: ["$request.header.Authorization"],
     // });
 

@@ -1,26 +1,27 @@
+import type { JSX } from "react";
 import { useRef } from "react";
-import { DOWN_ARROW } from "@secure-cloud-files/webapp/src/utils/svgs";
-import { getPresignedDownloadLink } from "@secure-cloud-files/webapp/src/utils/fetchers";
+import { DOWN_ARROW } from "#utils/svgs.tsx";
+import { getPresignedDownloadLink } from "#utils/fetchers.ts";
 
 interface Props {
   fileKey: string;
 }
 
-export default function DownloadButton({ fileKey }: Props) {
+export default function DownloadButton({ fileKey }: Props): JSX.Element {
   const downloadAnchorRef = useRef<HTMLAnchorElement | null>(null);
 
-  const triggerFileDownload = (key: string) => {
+  const triggerFileDownload = (key: string): void => {
     getPresignedDownloadLink(key)
       .then(async (downloadUrl) => {
-        // TODO change so that this logs back to the app! (And below as well)
+        // TODO: change so that this logs back to the app! (And below as well)
         if (downloadAnchorRef.current == null) {
-          console.error("oops, null anchor?!")
+          console.error("oops, null anchor?!");
         } else {
           downloadAnchorRef.current.href = downloadUrl;
           downloadAnchorRef.current.click();
         }
       })
-      .catch(reason => console.error(`couldn't get download url: ${JSON.stringify(reason)}`));
+      .catch((reason) => console.error(`couldn't get download url: ${JSON.stringify(reason)}`));
   };
 
   return (
@@ -35,4 +36,4 @@ export default function DownloadButton({ fileKey }: Props) {
       <a ref={downloadAnchorRef} className="hidden invisible" />
     </>
   );
-};
+}

@@ -1,4 +1,4 @@
-import DownloadButton from "@secure-cloud-files/webapp/src/components/DownloadButton";
+import DownloadButton from "#components/DownloadButton.tsx";
 
 describe("<DownloadButton>", () => {
   it("calls getPresignedDownloadLink and then downloads a file from the respsonse URL", () => {

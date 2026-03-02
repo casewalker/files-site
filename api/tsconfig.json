@@ -1,12 +1,7 @@
 {
-  "extends": "../tsconfig.json",
+  "extends": "../tsconfig.base.json",
   "compilerOptions": {
-    "rootDir": "src",
-    "outDir": "dist",
-    "paths": {
-      "@secure-cloud-files/*": ["./*"]
-    },
-    "types": ["vitest/globals"]
+    "rootDir": "."
   },
-  "references": [{ "path": "../infra" }]
+  "include": ["./**/*.ts"]
 }
