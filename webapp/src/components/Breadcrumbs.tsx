@@ -20,7 +20,12 @@ export default function Breadcrumbs({ directoryLocations }: Props): JSX.Element 
           return (
             <li key={`${index}:${directoryLocation}`}>
               {index < directoryLocations.length - 1 ? (
-                <a className="link link-neutral gap-0.5 inline-flex">{breadcrumbContent}</a>
+                <a
+                  className="link link-neutral gap-0.5 inline-flex"
+                  href="/" // TODO: Fix this to go to the right place someday
+                >
+                  {breadcrumbContent}
+                </a>
               ) : (
                 <span className="items-center gap-0.5 inline-flex">{breadcrumbContent}</span>
               )}

@@ -2,7 +2,7 @@ import type { FileDetails } from "@secure-cloud-files/api/util/awsUtils.ts";
 import type { MyFileSystem } from "#utils/s3FileTypes.ts";
 import { ObjectType } from "#utils/s3FileTypes.ts";
 
-const API_GATEWAY_URL = process.env.NEXT_PUBLIC_API_GATEWAY_URL;
+const API_GATEWAY_URL = import.meta.env.VITE_API_GATEWAY_URL;
 
 export const listAllFiles = async (): Promise<MyFileSystem[]> => {
   return fetch(`${API_GATEWAY_URL}/listFiles`)

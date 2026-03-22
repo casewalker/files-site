@@ -5,6 +5,9 @@ import tsParser from "@typescript-eslint/parser";
 import eslint from "@eslint/js";
 import importX from "eslint-plugin-import-x";
 import eslintConfigPrettier from "eslint-config-prettier";
+import reactHooks from "eslint-plugin-react-hooks";
+import reactRefresh from "eslint-plugin-react-refresh";
+import jsxA11y from "eslint-plugin-jsx-a11y";
 
 // TODO: Switch from tslint.config() to ESLint's defineConfig() once type incompatibilities with
 // third-party plugins (e.g. eslint-plugin-import-x) are resolved upstream.
@@ -27,7 +30,7 @@ export default tslint.config(
       "**/cdk.out/**",
       "**/*.d.ts",
       "vitest.config.ts",
-      "**/.next/**",
+      "**/dist/**",
     ],
   },
 
@@ -58,8 +61,13 @@ export default tslint.config(
   },
   {
     files: ["./webapp/**/*.{ts,tsx}"],
+    extends: [
+      reactHooks.configs.flat.recommended,
+      reactRefresh.configs.vite,
+      jsxA11y.flatConfigs.recommended,
+    ],
     languageOptions: {
-      globals: { ...globals.browser, ...globals.node },
+      globals: { ...globals.browser },
       ecmaVersion: "latest",
       sourceType: "module",
       parser: tsParser,
