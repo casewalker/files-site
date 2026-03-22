@@ -6,6 +6,10 @@ packages:
 linkWorkspacePackages: false
 
 onlyBuiltDependencies:
+  - cypress
   - esbuild
+  - msw
+  - sharp
+  - unrs-resolver
 
 savePrefix: ""
