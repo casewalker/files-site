@@ -1,9 +1,6 @@
 import { coverageConfigDefaults, defineConfig } from "vitest/config";
 
 export default defineConfig({
-  esbuild: {
-    target: "esnext",
-  },
   test: {
     globals: true,
     silent: "passed-only",

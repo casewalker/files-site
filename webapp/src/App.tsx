@@ -8,7 +8,7 @@ import type { MyFileSystem } from "#utils/s3FileTypes.ts";
 import { MENU_ICON, X_ICON } from "#utils/svgs.tsx";
 import { listAllFiles } from "#utils/fetchers.ts";
 
-export default function Home(): JSX.Element {
+export default function App(): JSX.Element {
   const [allFiles, setAllFiles] = useState<MyFileSystem[] | undefined>(undefined);
   useEffect(() => {
     if (window !== undefined) {
@@ -76,7 +76,11 @@ export default function Home(): JSX.Element {
                 "duration-100 shadow-xs [transform:translate3d(0,0,0)]"
               }
             >
-              <a className="btn btn-ghost text-xl ml-6 h-full" title="Home directory">
+              <a
+                className="btn btn-ghost text-xl ml-6 h-full"
+                title="Home directory"
+                href="/" // TODO: replace?
+              >
                 SecureCloudFiles
               </a>
               <label

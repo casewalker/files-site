@@ -33,7 +33,9 @@ export default function DownloadButton({ fileKey }: Props): JSX.Element {
       >
         {DOWN_ARROW}
       </button>
-      <a ref={downloadAnchorRef} className="hidden invisible" />
+      {/* This is a hidden programmatic download trigger, it is ok to break A11Y, it is not user-facing */}
+      {/* eslint-disable-next-line jsx-a11y/anchor-has-content, jsx-a11y/anchor-is-valid */}
+      <a ref={downloadAnchorRef} className="hidden invisible" download aria-hidden="true" />
     </>
   );
 }
