@@ -1,4 +1,5 @@
 import type { JSX } from "react";
+import { useState } from "react";
 import type { MyFileSystem } from "#utils/s3FileTypes.ts";
 import { useIsMobile } from "#hooks/use-mobile.ts";
 import FileExplorerMenu from "#components/FileExplorerMenu.tsx";
@@ -15,6 +16,17 @@ interface Props {
 
 export default function FileExplorerSidebar({ files }: Props): JSX.Element {
   const isMobile = useIsMobile();
+  const [openDirs, setOpenDirs] = useState<Set<string>>(new Set());
+
+  const toggleDirectoryState = (pathToDirectory: string): void => {
+    const nextDirectoryStates = new Set(openDirs);
+    if (openDirs.has(pathToDirectory)) {
+      nextDirectoryStates.delete(pathToDirectory);
+    } else {
+      nextDirectoryStates.add(pathToDirectory);
+    }
+    setOpenDirs(nextDirectoryStates);
+  };
 
   return (
     <Sidebar collapsible={isMobile ? "offcanvas" : "none"}>
@@ -29,71 +41,80 @@ export default function FileExplorerSidebar({ files }: Props): JSX.Element {
       </SidebarHeader>
       <SidebarContent className="pl-4 pr-2 pt-2">
         <SidebarMenu className="gap-1">
-          <FileExplorerMenu files={files} />
-          {/*<FileExplorerMenu files={[*/}
-          {/*  {*/}
-          {/*    type: S3ObjectType.DIRECTORY,*/}
-          {/*    name: "directory1",*/}
-          {/*    contents: [],*/}
-          {/*    path: "directory1",*/}
-          {/*  },*/}
-          {/*  {*/}
-          {/*    type: S3ObjectType.DIRECTORY,*/}
-          {/*    name: "directory2",*/}
-          {/*    path: "directory2",*/}
-          {/*    contents: [*/}
-          {/*      {*/}
-          {/*        type: S3ObjectType.FILE,*/}
-          {/*        name: "file1.txt",*/}
-          {/*        lastModified: new Date("2020-01-01"),*/}
-          {/*        size: 1024,*/}
-          {/*        path: "directory2/file1.txt",*/}
-          {/*      },*/}
-          {/*      {*/}
-          {/*        type: S3ObjectType.FILE,*/}
-          {/*        name: "file2.txt",*/}
-          {/*        lastModified: new Date("2020-01-02"),*/}
-          {/*        size: 2048,*/}
-          {/*        path: "directory2/file2.txt",*/}
-          {/*      },*/}
-          {/*    ],*/}
-          {/*  },*/}
-          {/*  {*/}
-          {/*    type: S3ObjectType.DIRECTORY,*/}
-          {/*    name: "directory3",*/}
-          {/*    path: "directory3",*/}
-          {/*    contents: [*/}
-          {/*      {*/}
-          {/*        type: S3ObjectType.FILE,*/}
-          {/*        name: "file3.txt",*/}
-          {/*        lastModified: new Date("2020-01-01"),*/}
-          {/*        size: 111,*/}
-          {/*        path: "directory3/file3.txt",*/}
-          {/*      },*/}
-          {/*      {*/}
-          {/*        type: S3ObjectType.DIRECTORY,*/}
-          {/*        name: "directory4",*/}
-          {/*        path: "directory3/directory4",*/}
-          {/*        contents: [*/}
-          {/*          {*/}
-          {/*            type: S3ObjectType.FILE,*/}
-          {/*            name: "file4.txt",*/}
-          {/*            lastModified: new Date("2020-01-03"),*/}
-          {/*            size: 2000,*/}
-          {/*            path: "directory3/directory4/file4.txt",*/}
-          {/*          }*/}
-          {/*        ]*/}
-          {/*      },*/}
-          {/*    ],*/}
-          {/*  },*/}
-          {/*  {*/}
-          {/*    type: S3ObjectType.FILE,*/}
-          {/*    name: "file5.txt",*/}
-          {/*    lastModified: new Date("2020-01-04"),*/}
-          {/*    size: 2048,*/}
-          {/*    path: "file5.txt",*/}
-          {/*  },*/}
-          {/*]}/>*/}
+          <FileExplorerMenu files={files} openDirs={openDirs} toggleDir={toggleDirectoryState} />
+          {/*<FileExplorerMenu*/}
+          {/*  openDirs={openDirs}*/}
+          {/*  toggleDir={toggleDirectoryState}*/}
+          {/*  files={[*/}
+          {/*    {*/}
+          {/*      type: ObjectType.DIRECTORY,*/}
+          {/*      directoryName: "directory1",*/}
+          {/*      contents: [],*/}
+          {/*      pathToDirectory: "directory1",*/}
+          {/*    },*/}
+          {/*    {*/}
+          {/*      type: ObjectType.DIRECTORY,*/}
+          {/*      directoryName: "directory2",*/}
+          {/*      pathToDirectory: "directory2",*/}
+          {/*      contents: [*/}
+          {/*        {*/}
+          {/*          type: ObjectType.FILE,*/}
+          {/*          key: "directory2/file1.txt",*/}
+          {/*          fileName: "file1.txt",*/}
+          {/*          createdDate: new Date("2020-01-01").toISOString(),*/}
+          {/*          size: 1024,*/}
+          {/*          filePath: "directory2/file1.txt",*/}
+          {/*        },*/}
+          {/*        {*/}
+          {/*          type: ObjectType.FILE,*/}
+          {/*          key: "directory2/file2.txt",*/}
+          {/*          fileName: "file2.txt",*/}
+          {/*          createdDate: new Date("2020-01-02").toISOString(),*/}
+          {/*          size: 2048,*/}
+          {/*          filePath: "directory2/file2.txt",*/}
+          {/*        },*/}
+          {/*      ],*/}
+          {/*    },*/}
+          {/*    {*/}
+          {/*      type: ObjectType.DIRECTORY,*/}
+          {/*      directoryName: "directory3",*/}
+          {/*      pathToDirectory: "directory3",*/}
+          {/*      contents: [*/}
+          {/*        {*/}
+          {/*          type: ObjectType.FILE,*/}
+          {/*          key: "directory3/file3.txt",*/}
+          {/*          fileName: "file3.txt",*/}
+          {/*          createdDate: new Date("2020-01-01").toISOString(),*/}
+          {/*          size: 111,*/}
+          {/*          filePath: "directory3/file3.txt",*/}
+          {/*        },*/}
+          {/*        {*/}
+          {/*          type: ObjectType.DIRECTORY,*/}
+          {/*          directoryName: "directory4",*/}
+          {/*          pathToDirectory: "directory3/directory4",*/}
+          {/*          contents: [*/}
+          {/*            {*/}
+          {/*              type: ObjectType.FILE,*/}
+          {/*              key: "directory3/directory4/file4.txt",*/}
+          {/*              fileName: "file4.txt",*/}
+          {/*              createdDate: new Date("2020-01-03").toISOString(),*/}
+          {/*              size: 2000,*/}
+          {/*              filePath: "directory3/directory4/file4.txt",*/}
+          {/*            },*/}
+          {/*          ],*/}
+          {/*        },*/}
+          {/*      ],*/}
+          {/*    },*/}
+          {/*    {*/}
+          {/*      type: ObjectType.FILE,*/}
+          {/*      key: "file5.txt",*/}
+          {/*      fileName: "file5.txt",*/}
+          {/*      createdDate: new Date("2020-01-04").toISOString(),*/}
+          {/*      size: 2048,*/}
+          {/*      filePath: "file5.txt",*/}
+          {/*    },*/}
+          {/*  ]}*/}
+          {/*/>*/}
         </SidebarMenu>
       </SidebarContent>
     </Sidebar>

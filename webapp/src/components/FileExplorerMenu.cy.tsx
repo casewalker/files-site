@@ -2,6 +2,10 @@ import FileExplorerMenu from "#components/FileExplorerMenu.tsx";
 import { ObjectType } from "#utils/s3FileTypes.ts";
 import type { DirectoryObject, FileObject } from "#utils/s3FileTypes.ts";
 
+const toggleDir = (path: string): void => {
+  console.log(`Toggled directory: ${path}`);
+};
+
 const FILE1: FileObject = {
   key: "key1",
   type: ObjectType.FILE,
@@ -35,14 +39,14 @@ const DIR2: DirectoryObject = {
 
 describe("<FileExplorerMenu>", () => {
   it("should display a single file", () => {
-    cy.mount(<FileExplorerMenu files={[FILE1]} />);
+    cy.mount(<FileExplorerMenu files={[FILE1]} openDirs={new Set()} toggleDir={toggleDir} />);
     cy.get("ul").should("contain.html", "li");
     cy.get("li").should("have.length", 1);
     cy.get("li").should("contain.text", "testfile1");
   });
 
   it("should display a single directory with a single file, hidden until clicked", () => {
-    cy.mount(<FileExplorerMenu files={[DIR1]} />);
+    cy.mount(<FileExplorerMenu files={[DIR1]} openDirs={new Set()} toggleDir={toggleDir} />);
     cy.get("ul").should("contain.html", "li");
     cy.get("li").should("have.length", 2);
     cy.get("li").contains("dir1").should("be.visible");
@@ -55,7 +59,7 @@ describe("<FileExplorerMenu>", () => {
   });
 
   it("should display a single directly with no files, saying '(empty folder)'", () => {
-    cy.mount(<FileExplorerMenu files={[EMPTY_DIR]} />);
+    cy.mount(<FileExplorerMenu files={[EMPTY_DIR]} openDirs={new Set()} toggleDir={toggleDir} />);
     cy.get("ul").should("contain.html", "li");
     cy.get("li").should("have.length", 2);
     cy.get("li").contains("dir3").should("be.visible");
@@ -64,7 +68,7 @@ describe("<FileExplorerMenu>", () => {
   });
 
   it("should correctly display a complex nested structure", () => {
-    cy.mount(<FileExplorerMenu files={[DIR2]} />);
+    cy.mount(<FileExplorerMenu files={[DIR2]} openDirs={new Set()} toggleDir={toggleDir} />);
     cy.get("ul").should("contain.html", "li");
     cy.get("li").should("have.length", 5);
     cy.contains("details", "dir2").should("be.visible");
