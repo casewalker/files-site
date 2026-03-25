@@ -2,9 +2,10 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 @import "@fontsource-variable/geist";
-/* ---break--- */
-@custom-variant dark (&:is(.dark *));
 
+/* ---break--- */
+
+@custom-variant dark (&:is(.dark *));
 
 @layer base {
   * {

@@ -61,7 +61,7 @@ export default function FilesTable({ files }: Props): JSX.Element {
             <th className={TH_CLASSES}>Download</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody data-testid="files-table-body">
           {files.map((file) => {
             switch (file.type) {
               case ObjectType.FILE:
