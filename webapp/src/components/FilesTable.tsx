@@ -45,16 +45,20 @@ const getFileTypeSvg = (filename: string): JSX.Element => {
   return IMG_EXTENSIONS.has(extension) ? IMAGE_ICON : FILE_ICON;
 };
 
+const TH_CLASSES = "h-10 px-4 text-left align-middle font-medium text-muted-foreground";
+const TR_CLASSES = "border-b border-border/30 last:border-0 transition-colors hover:bg-muted/50";
+const TD_CLASSES = "p-4 align-middle";
+
 export default function FilesTable({ files }: Props): JSX.Element {
   return (
     <div className="overflow-x-auto">
-      <table className="table">
+      <table className="w-full caption-bottom text-sm">
         <thead>
-          <tr>
-            <th className="pl-10">Name</th>
-            <th>Created</th>
-            <th>Modified</th>
-            <th>Download</th>
+          <tr className="border-b border-border/60">
+            <th className={`${TH_CLASSES} pl-10`}>Name</th>
+            <th className={TH_CLASSES}>Created</th>
+            <th className={TH_CLASSES}>Modified</th>
+            <th className={TH_CLASSES}>Download</th>
           </tr>
         </thead>
         <tbody>
@@ -62,39 +66,39 @@ export default function FilesTable({ files }: Props): JSX.Element {
             switch (file.type) {
               case ObjectType.FILE:
                 return (
-                  <tr className="hover" key={file.key}>
-                    <td className="text-nowrap">
+                  <tr className={TR_CLASSES} key={file.key}>
+                    <td className={`${TD_CLASSES} text-nowrap`}>
                       <span className="inline-block align-bottom pb-0.5">
                         {getFileTypeSvg(file.fileName)}
                       </span>
                       <span className="ml-2">{file.fileName}</span>
                     </td>
-                    <td>{file.createdDate}</td>
-                    <td>{file.lastModified}</td>
-                    <td>
+                    <td className={TD_CLASSES}>{file.createdDate}</td>
+                    <td className={TD_CLASSES}>{file.lastModified}</td>
+                    <td className={TD_CLASSES}>
                       <DownloadButton fileKey={file.key} />
                     </td>
                   </tr>
                 );
               case ObjectType.DIRECTORY:
                 return (
-                  <tr className="hover" key={file.pathToDirectory + file.directoryName}>
-                    <td className="text-nowrap">
+                  <tr className={TR_CLASSES} key={file.pathToDirectory + file.directoryName}>
+                    <td className={`${TD_CLASSES} text-nowrap`}>
                       <span className="inline-block align-bottom pb-0.5">{FOLDER_ICON}</span>
                       <span className="ml-2">{file.directoryName}</span>
                     </td>
-                    <td>--</td>
-                    <td>--</td>
-                    <td></td>
+                    <td className={TD_CLASSES}>--</td>
+                    <td className={TD_CLASSES}>--</td>
+                    <td className={TD_CLASSES}></td>
                   </tr>
                 );
               default:
                 return (
-                  <tr>
-                    <td></td>
-                    <td>--</td>
-                    <td>--</td>
-                    <td></td>
+                  <tr className={TR_CLASSES}>
+                    <td className={TD_CLASSES}></td>
+                    <td className={TD_CLASSES}>--</td>
+                    <td className={TD_CLASSES}>--</td>
+                    <td className={TD_CLASSES}></td>
                   </tr>
                 );
             }
