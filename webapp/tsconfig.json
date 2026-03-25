@@ -5,10 +5,11 @@
     "moduleResolution": "bundler",
     "jsx": "react-jsx",
     "lib": ["dom", "dom.iterable", "ESNext"],
+    "types": ["node", "vitest/globals"],
     "incremental": true,
     "isolatedModules": true,
     "rootDir": "."
   },
   "include": ["src/vite-env.d.ts", "**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "cypress", "cypress.config.ts"]
 }

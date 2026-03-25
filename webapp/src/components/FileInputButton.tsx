@@ -20,7 +20,7 @@ export default function FileInputButton(): JSX.Element {
           // TODO: fix fetch here
           void fetch(uploadUrl, {
             method: "PUT",
-            body: event.target.files?.item(0),
+            body: event.target.files?.[0],
           });
         })
         .catch((reason) => console.error("couldn't get upload url", reason));

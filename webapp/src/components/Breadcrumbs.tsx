@@ -29,7 +29,9 @@ export default function Breadcrumbs({ directoryLocations }: Props): JSX.Element 
                   {breadcrumbContent}
                 </a>
               ) : (
-                <span className="inline-flex items-center gap-0.5 text-foreground">{breadcrumbContent}</span>
+                <span className="inline-flex items-center gap-0.5 text-foreground">
+                  {breadcrumbContent}
+                </span>
               )}
             </li>
           );
