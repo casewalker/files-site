@@ -4,7 +4,7 @@
 @import "@fontsource-variable/geist";
 /* ---break--- */
 @custom-variant dark (&:is(.dark *));
-@plugin "daisyui";
+
 
 @layer base {
   * {
