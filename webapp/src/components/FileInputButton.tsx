@@ -2,6 +2,7 @@ import type { ChangeEvent, JSX } from "react";
 import { useRef } from "react";
 import { UPLOAD_FILE_ICON } from "#utils/svgs.tsx";
 import { getPresignedUploadLink } from "#utils/fetchers.ts";
+import { Button } from "#components/shadcn/Button.tsx";
 
 export default function FileInputButton(): JSX.Element {
   const fileInputRef = useRef<HTMLInputElement | null>(null);
@@ -37,10 +38,16 @@ export default function FileInputButton(): JSX.Element {
         ref={fileInputRef}
         onChange={uploadFile}
       />
-      <button className="btn" id="UploadFileButton" title="Upload files" onClick={triggerFileInput}>
+      <Button
+        variant="outline"
+        size="lg"
+        title="Upload files"
+        id="UploadFileButton"
+        onClick={triggerFileInput}
+      >
         {UPLOAD_FILE_ICON}
         <span className="hidden invisible sm:inline sm:visible">Upload Files</span>
-      </button>
+      </Button>
     </>
   );
 }

@@ -11,6 +11,7 @@ import { Slot } from "radix-ui";
 import { MenuIcon } from "lucide-react";
 import { useIsMobile } from "#hooks/use-mobile.ts";
 import { cn } from "#lib/utils.ts";
+import { Button } from "#components/shadcn/Button.tsx";
 import { Input } from "#components/shadcn/Input.tsx";
 import { Separator } from "#components/shadcn/Separator.tsx";
 import {
@@ -254,10 +255,13 @@ export function SidebarTrigger({
   const { toggleSidebar } = useSidebar();
 
   return (
-    <button
+    <Button
       data-sidebar="trigger"
       data-slot="sidebar-trigger"
-      className={cn("btn", className)}
+      variant="outline"
+      size="icon"
+      className={className}
+      id="OpenSidebarButton"
       onClick={(event) => {
         onClick?.(event);
         toggleSidebar();
@@ -266,7 +270,7 @@ export function SidebarTrigger({
     >
       <MenuIcon className="h-5 w-5 stroke-2" />
       <span className="sr-only">Open menu</span>
-    </button>
+    </Button>
   );
 }
 

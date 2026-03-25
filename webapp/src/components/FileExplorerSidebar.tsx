@@ -9,6 +9,7 @@ import {
   SidebarHeader,
   SidebarMenu,
 } from "#components/shadcn/Sidebar.tsx";
+import { Button } from "#components/shadcn/Button.tsx";
 
 interface Props {
   files: MyFileSystem[];
@@ -31,13 +32,11 @@ export default function FileExplorerSidebar({ files }: Props): JSX.Element {
   return (
     <Sidebar collapsible={isMobile ? "offcanvas" : "none"}>
       <SidebarHeader className="h-16 flex-row items-center border-b bg-background px-6">
-        <a
-          href="/"
-          className="btn btn-ghost w-fit text-xl font-semibold hover:bg-muted"
-          title="Home directory"
-        >
-          SecureCloudFiles
-        </a>
+        <Button variant="ghost" asChild className="w-fit text-xl" id="HomeButton">
+          <a href="/" title="Home directory">
+            SecureCloudFiles
+          </a>
+        </Button>
       </SidebarHeader>
       <SidebarContent className="pl-4 pr-2 pt-2">
         <SidebarMenu className="gap-1">
