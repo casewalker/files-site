@@ -3,5 +3,6 @@
   "compilerOptions": {
     "types": ["cypress"]
   },
-  "include": ["**/*.ts", "../src/vite-env.d.ts"]
+  "include": ["**/*.ts", "../cypress.config.ts", "../src/vite-env.d.ts"],
+  "exclude": ["node_modules"]
 }

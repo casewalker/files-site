@@ -3,19 +3,14 @@ import vitest from "@vitest/eslint-plugin";
 import tslint from "typescript-eslint";
 import tsParser from "@typescript-eslint/parser";
 import eslint from "@eslint/js";
+import { defineConfig } from "eslint/config";
 import importX from "eslint-plugin-import-x";
 import eslintConfigPrettier from "eslint-config-prettier";
 import reactHooks from "eslint-plugin-react-hooks";
 import reactRefresh from "eslint-plugin-react-refresh";
 import jsxA11y from "eslint-plugin-jsx-a11y";
 
-// TODO: Switch from tslint.config() to ESLint's defineConfig() once type incompatibilities with
-// third-party plugins (e.g. eslint-plugin-import-x) are resolved upstream.
-// See: https://github.com/typescript-eslint/typescript-eslint/issues/11313
-//      https://github.com/typescript-eslint/typescript-eslint/issues/10934
-//      https://github.com/un-ts/eslint-plugin-import-x/issues/421
-//      https://github.com/typescript-eslint/typescript-eslint/issues/11543
-export default tslint.config(
+export default defineConfig(
   {
     ignores: [
       "**/*.json",
@@ -61,6 +56,7 @@ export default tslint.config(
   },
   {
     files: ["./webapp/**/*.{ts,tsx}"],
+    ignores: ["./webapp/cypress/**", "./webapp/cypress.config.ts"],
     extends: [
       reactHooks.configs.flat.recommended,
       reactRefresh.configs.vite,
@@ -72,6 +68,16 @@ export default tslint.config(
       sourceType: "module",
       parser: tsParser,
       parserOptions: { project: "./webapp/tsconfig.json" },
+    },
+  },
+  {
+    files: ["./webapp/cypress/**/*.ts", "./webapp/cypress.config.ts"],
+    languageOptions: {
+      globals: { ...globals.browser },
+      ecmaVersion: "latest",
+      sourceType: "module",
+      parser: tsParser,
+      parserOptions: { project: "./webapp/cypress/tsconfig.json" },
     },
   },
   {

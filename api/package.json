@@ -11,16 +11,16 @@
     "typecheck": "tsc --noemit"
   },
   "dependencies": {
-    "@aws-sdk/client-dynamodb": "3.806.0",
-    "@aws-sdk/client-s3": "3.806.0",
-    "@aws-sdk/client-sts": "3.806.0",
-    "@aws-sdk/lib-dynamodb": "3.806.0",
-    "@aws-sdk/s3-request-presigner": "3.806.0"
+    "@aws-sdk/client-dynamodb": "3.1048.0",
+    "@aws-sdk/client-s3": "3.1048.0",
+    "@aws-sdk/client-sts": "3.1047.0",
+    "@aws-sdk/lib-dynamodb": "3.1048.0",
+    "@aws-sdk/s3-request-presigner": "3.1048.0"
   },
   "devDependencies": {
-    "@types/aws-lambda": "8.10.149",
-    "typescript": "5.8.3",
-    "vitest": "4.1.1"
+    "@types/aws-lambda": "8.10.161",
+    "typescript": "6.0.3",
+    "vitest": "4.1.6"
   },
   "imports": {
     "#*": "./src/*"
