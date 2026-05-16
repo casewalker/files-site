@@ -29,56 +29,36 @@ export default defineConfig(
     ],
   },
 
+  {
+    languageOptions: {
+      ecmaVersion: "latest",
+      sourceType: "module",
+      parser: tsParser,
+      parserOptions: {
+        projectService: {
+          allowDefaultProject: ["webapp/cypress.config.ts"],
+        },
+        tsconfigRootDir: __dirname,
+      },
+    },
+  },
   // global defaults
   eslint.configs.recommended,
   importX.flatConfigs.recommended,
   importX.flatConfigs.typescript,
   ...tslint.configs.recommended,
   {
-    files: ["./api/**/*.ts"],
-    languageOptions: {
-      globals: { ...globals.node },
-      ecmaVersion: "latest",
-      sourceType: "module",
-      parser: tsParser,
-      parserOptions: { project: "./api/tsconfig.json" },
-    },
-  },
-  {
-    files: ["./infra/**/*.ts"],
-    languageOptions: {
-      globals: { ...globals.node },
-      ecmaVersion: "latest",
-      sourceType: "module",
-      parser: tsParser,
-      parserOptions: { project: "./infra/tsconfig.json" },
-    },
+    files: ["./api/**/*.ts", "./infra/**/*.ts"],
+    languageOptions: { globals: { ...globals.node } },
   },
   {
     files: ["./webapp/**/*.{ts,tsx}"],
-    ignores: ["./webapp/cypress/**", "./webapp/cypress.config.ts"],
     extends: [
       reactHooks.configs.flat.recommended,
       reactRefresh.configs.vite,
       jsxA11y.flatConfigs.recommended,
     ],
-    languageOptions: {
-      globals: { ...globals.browser },
-      ecmaVersion: "latest",
-      sourceType: "module",
-      parser: tsParser,
-      parserOptions: { project: "./webapp/tsconfig.json" },
-    },
-  },
-  {
-    files: ["./webapp/cypress/**/*.ts", "./webapp/cypress.config.ts"],
-    languageOptions: {
-      globals: { ...globals.browser },
-      ecmaVersion: "latest",
-      sourceType: "module",
-      parser: tsParser,
-      parserOptions: { project: "./webapp/cypress/tsconfig.json" },
-    },
+    languageOptions: { globals: { ...globals.browser } },
   },
   {
     rules: {
