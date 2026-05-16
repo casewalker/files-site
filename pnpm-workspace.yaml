@@ -3,13 +3,12 @@ packages:
   - infra
   - webapp
 
-linkWorkspacePackages: false
+allowBuilds:
+  cypress: true
+  esbuild: true
+  msw: true
+  unrs-resolver: false
 
-onlyBuiltDependencies:
-  - cypress
-  - esbuild
-  - msw
-  - sharp
-  - unrs-resolver
+linkWorkspacePackages: false
 
 savePrefix: ""
